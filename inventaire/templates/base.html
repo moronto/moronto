@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.bundle.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <title>Document</title>
+</head>
+<body>
+    {% comment %} start navbar {% endcomment %}
+    <div class="content">
+    <div class="sidebar">
+      <div class="sidebody">
+        
+
+          <div class="logo">
+            <img src="{% static 'images/logo.jpg' %}"   alt="logo de societe">
+          </div>
+    
+          <div class="links">
+            <a href="">Dashboord</a>
+            <a href="">Mouvement</a>
+            <a href="{% url 'reservations' %}">Reservations</a>
+            <a href="">Inventaire</a>
+          </div>
+    
+        
+      </div>
+      <div class="sidefooter">
+        <div class="br"></div>
+        <h1 class="links"><a href="{% url 'login' %}">login</a></h1>
+      </div>
+
+    </div>
+    <div class="bodycontent">
+      {% block content %}
+    {% endblock content %}
+    </div>
+  </div>
+    {% comment %} end navbar {% endcomment %}
+
+    
+
+<script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>       
+<script src="{% static 'js/scriptes.js'%}"></script>       
+
+</body>
+</html>

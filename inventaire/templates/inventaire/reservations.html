@@ -1,0 +1,62 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<h1>Reservation</h1>
+
+<div class="formReservation ">
+    <form  method="post">
+        {% csrf_token %}
+        <div class="row ml-5 justify-content-center">
+            <div class="col-md-3">
+                <label for="dateReservation">Date de reservation</label>
+            <input type="date" id="dateReservation" name="dateReservation" class="form-control ">
+            </div>
+            <div class="col-md-3">
+                <label for="refReservation">Réference de reservation</label>
+            <input type="text" id="refReservation" name="refReservation" class="form-control ">
+            </div>
+            <div class="col-md-3">
+                <label for="chargeAffaire">Chargee d'affaire</label>
+                <input type="text" id="chargeAffaire" name="chargeAffaire" class="form-control ">
+            </div>
+            <div class="col-md-3">
+                <label for="etatReservation">Etat de reservation</label>
+                <input type="text" id="etatReservation" name="etatReservation" class="form-control ">
+            </div>
+        </div>
+        <div  class="row ">
+            <h3 class="mt-2">Details de Reservation : 
+                <span class="btn btn-success p-2 fa fa-plus-square" onclick="addLigne()"></span>
+                <span class="btn btn-danger p-2 fa fa-minus-square" onclick="deletLigne()"></span>
+            </h3>
+          
+            <div id="detailReservation" class="row p-2">
+                <div id="first" class="row">
+                    <div class="col-md-3">
+                        <label for="designation">Designation</label>
+                        <input type="text" id="designation" name="designation" class="form-control ">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="qte">Quantité</label>
+                        <input type="text" id="qte" name="qte" class="form-control ">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="dateLivraison">Date de Livraison</label>
+                        <input type="date"  id="dateLivraison" name="dateLivraison" class="form-control ">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="dateRetour">Date de Retout</label>
+                        <input type="date" id="dateRetour" name="dateRetour" class="form-control ">
+                    </div>
+                </div>
+    
+            </div>
+
+
+        </div>
+        <input type="submit" value="ok">
+
+    </form>
+</div>   
+
+{% endblock content %} 
