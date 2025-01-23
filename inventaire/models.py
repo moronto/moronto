@@ -25,7 +25,9 @@ class DetilsReservation(models.Model):
     designation=models.CharField(max_length=200)
     qte=models.IntegerField()
     dateLivraison=models.DateField()
-    dateRetour=models.DateField()    
+    dateRetour=models.DateField() 
+    def __str__(self):
+        return self.designation   
     
 
     

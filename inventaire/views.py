@@ -17,18 +17,23 @@ def reservations(request):
         g=list(d.items())
         c=dict(g[5:])
         print(d['refReservation'][0])
-
         
+        ref=Reservation.objects.filter(refReservation=d['refReservation'][0])[0]
+      
         
         for i in range(len(c['designation'])):
-            DetilsReservation(
-                refReservation=d["refReservation"][0],
+            f=DetilsReservation(
+                refReservation=ref,
                 designation=c['designation'][i],
                 qte=c['qte'][i],
                 dateLivraison=c['dateLivraison'][i],
                 dateRetour=c['dateRetour'][i],
+
+
+
             )
-            DetilsReservation.save()
+            
+            f.save()
         
       
     
