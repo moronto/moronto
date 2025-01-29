@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h2>Detail de : {{refrence.refMateriel}}</h2>
+
+<div class="container">
+{% if refrence.categorie == 'GROUPE ELECTROGENE' %}
+    
+<div class="row bg-success p-2 m-1">
+    <div class="col-md-5">Puissance </div>
+    <div class="col-md-2">:</div>
+    <div class="col-md-5">
+        {{data.puissance}}
+    </div>
+</div>
+<div class="row bg-success p-2 m-1">
+    <div class="col-md-5">Marque </div>
+    <div class="col-md-2">:</div>
+    <div class="col-md-5">
+        {{data.marque}}
+    </div>
+</div>
+<div class="row bg-success p-2 m-1">
+    <div class="col-md-5">Dimenssion </div>
+    <div class="col-md-2">:</div>
+    <div class="col-md-5">
+        {{data.dimension}}
+    </div>
+</div>
+{% elif refrence.categorie == 'MOUDULAIRE' %}
+    
+<div class="row bg-success p-2 m-1">
+    <div class="col-md-5">Gamme </div>
+    <div class="col-md-2">:</div>
+    <div class="col-md-5">
+        {{data.gamme}}
+    </div>
+</div>
+
+<div class="row bg-success p-2 m-1">
+    <div class="col-md-5">Dimenssion </div>
+    <div class="col-md-2">:</div>
+    <div class="col-md-5">
+        {{data.dimension}}
+    </div>
+</div>
+{% elif refrence.categorie == 'CABINE AUTONOME' %}
+    
+<div class="row bg-success p-2 m-1">
+    <div class="col-md-5">Gamme </div>
+    <div class="col-md-2">:</div>
+    <div class="col-md-5">
+        {{data.gamme}}
+    </div>
+</div>
+<div class="row bg-success p-2 m-1">
+    <div class="col-md-5">Color </div>
+    <div class="col-md-2">:</div>
+    <div class="col-md-5">
+        {{data.color}}
+    </div>
+</div>
+<div class="row bg-success p-2 m-1">
+    <div class="col-md-5">Dimenssion </div>
+    <div class="col-md-2">:</div>
+    <div class="col-md-5">
+        {{data.dimension}}
+    </div>
+    {% endif %}
+</div>
+    <div class='row justify-content-center'>
+         <a class="btn btn-primary w-25" href="{% url 'stock'%}" role="button">Retour</a>
+    </div>
+</di>
+
+{% endblock content %}

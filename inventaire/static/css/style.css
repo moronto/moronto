@@ -159,3 +159,36 @@ h2{
     letter-spacing: 2px;
 }
 /* end page login */
+/* start stle stock */
+/* .body .row:nth-child(odd){
+    background-image: linear-gradient(0deg,#020744e8,transparent,blue);
+    font-size: medium;
+    
+    color:white
+}
+
+
+.body .row:nth-child(even){
+    background-image: linear-gradient(0deg,#05093fe8,transparent,rgb(195, 195, 226));
+    font-size: medium;
+   
+    color: white;
+} */
+.body .row {
+    color:rgb(247, 244, 244);
+    font-size: medium;
+    transition: .4s;
+    background-color: black;
+    opacity: .8;
+    border-bottom: 2px solid #EEE;
+}
+.body a{
+    color:rgb(239, 237, 243);
+    font-size: medium;
+}
+
+.body .row:hover{
+    background-color: #333;
+}
+
+/* end stle stock */

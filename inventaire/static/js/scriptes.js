@@ -23,3 +23,4 @@ function deletLigne(){
         d.lastElementChild.remove();
     }
 }
+

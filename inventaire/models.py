@@ -30,6 +30,53 @@ class DetilsReservation(models.Model):
         return self.designation   
     
 
+
+
     
+class Stock(models.Model):
+    etat=[("louer","LOUER"),
+          ("disponible","DISPONIBLE"),
+          ("vente","VENTE"),
+          ("don","DON"),
+          ("verifie","A VERIFIER"),
+          ("utiliser","UTILISER"),
+          ]
+    cat=[("GROUPE ELECTROGENE","GROUPE ELECTROGENE"),
+          ("MOUDULAIRE","MOUDULAIRE"),
+          ("CABINE AUTONOME","CABINE AUTONOME"),
+          ]
+    refMateriel=models.CharField(max_length=50,primary_key=True) 
+    designation=models.CharField(max_length=100) 
+    situation=models.CharField(max_length=50,choices=etat)
+    lieu=models.CharField(max_length=100)
+    categorie=models.CharField(max_length=50,choices=cat)
+
+    def __str__(self):
+        return self.refMateriel
+    
+class GroupeElectrogene(models.Model):
+    puissance=models.CharField(max_length=50)
+    marque=models.CharField(max_length=50)  
+    dimension=models.CharField(max_length=50) 
+    refMateriel=models.ForeignKey(Stock, on_delete=models.CASCADE)
+
+class Modulaire(models.Model):
+    gammeChoices=[
+        ('evenement','EVENEMENT'),
+        ('chantier','CHANTIER')
+    ]
+    gamme=models.CharField(max_length=50,choices=gammeChoices)  
+    dimension=models.CharField(max_length=50)
+    refMateriel=models.ForeignKey(Stock, on_delete=models.CASCADE)
+
+class CabinesAutonome(models.Model):
+    gammeChoices=[
+        ('evenement','EVENEMENT'),
+        ('chantier','CHANTIER')
+    ]
+    gamme=models.CharField(max_length=50,choices=gammeChoices)  
+    dimension=models.CharField(max_length=50)
+    color=models.CharField(max_length=50)
+    refMateriel=models.ForeignKey(Stock, on_delete=models.CASCADE)
 
 

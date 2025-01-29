@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<h1 class="text-center">
+    INVENTAIRE GENERAL
+</h1>
+
+<div class="row bg-black pt-2 pb-2 text-white ">
+    <div class="col-md-2 ">Réference</div>
+    <div class="col-md-4 ">Designation</div>
+    <div class="col-md-2 ">Situation</div>
+    <div class="col-md-2 ">Emplacement</div>
+    <div class="col-md-2 ">Categorie</div>    
+</div>
+<div class="body">
+
+    {% for mat in materiel%}
+    <div class="row  pt-2 pb-2 ">
+        <div class="col-md-2 "><a href="{% url 'detailStock' mat.refMateriel %}" class="btn p-0">{{mat.refMateriel}}</a></div>
+        <div class="col-md-4 ">{{mat.designation}}</div>
+        <div class="col-md-2 ">{{mat.situation}}</div>
+        <div class="col-md-2 ">{{mat.lieu}}</div>
+        <div class="col-md-2 ">{{mat.categorie}}</div>    
+    </div>
+    {% endfor%}
+</div>
+
+{% endblock content%}
