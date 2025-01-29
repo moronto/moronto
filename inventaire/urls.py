@@ -6,5 +6,6 @@ urlpatterns = [
     path('reservations/',reservations,name='reservations'),
     path('stock/',stock,name='stock'),
     path('detailStock/<str:ref>',detailStock,name='detailStock'),
+    path('addstock/',addStock,name='addstock'),
 
 ]

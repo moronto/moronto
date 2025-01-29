@@ -83,3 +83,11 @@ def detailStock(request, ref):
 
 
     })
+
+def addStock(request):
+    req=request.POST
+
+    print(req)
+    return render(request,'inventaire/addstock.html',{
+        'title': 'Ajtouer element',
+    })

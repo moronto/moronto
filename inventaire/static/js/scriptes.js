@@ -24,3 +24,32 @@ function deletLigne(){
     }
 }
 
+
+function displayBlocs(){
+    let ge=document.querySelector("#GE");
+    let cabine=document.querySelector("#cabine");
+    let modulaire=document.querySelector("#modulaire");
+    let selected=document.querySelector('#cat')
+
+    if(selected.value==='1'){
+        ge.style.display='block';
+        cabine.style.display='none';
+        modulaire.style.display='none';
+    }
+    else if(selected.value==='2'){
+        ge.style.display='none';
+        cabine.style.display='block';
+        modulaire.style.display='none';
+    }
+    else if(selected.value==='3'){
+        ge.style.display='none';
+        cabine.style.display='none';
+        modulaire.style.display='block';
+    }
+    else{
+        ge.style.display='none';
+        cabine.style.display='none';
+        modulaire.style.display='none';
+    }
+    
+}
