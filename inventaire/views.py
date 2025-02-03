@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from .models import *
-import json
+from django.contrib import messages
 def home(request):
-    return render(request,'inventaire/home.html')
+    return render(request,'inventaire/home.html',{
+        'title':"ATOULOC"
+    })
 
 def login(request):
     return render(request,'inventaire/login.html')
@@ -10,42 +12,37 @@ def login(request):
 
 def reservations(request):
 
+    req=request.POST
     if request.method=='POST':
-   
-        d=dict(request.POST)
+       r=Reservation(refReservation=req.get('refReservation'),
+                     chargerAffaire=req.get('chargerAffaire'),
+                     dateReservation=req.get('dateReservation'),
+                     client=req.get('client'),
+                     etat='En cours',
+                     )
+       if Reservation.objects.filter(refReservation=req.get('refReservation')).exists():
+            messages.warning(request,f"Pardon {req.get('refReservation')} exist deja ")
+       else :
+            r.save()
+            messages.success(request,f"Vous avez ajouter {req.get('refReservation')} avec succes ")
+            G=dict(req)
 
-        r=Reservation(
-            refReservation=d["refReservation"][0],
-            chargerAffaire=d["chargeAffaire"][0],
-            dateReservation=d["dateReservation"][0],
-            etat=False
+            refM=Reservation.objects.filter(refReservation=req.get('refReservation'))[0]
+            l=len(G.get("designation"))
+            print(refM)
+           
+            for i in range(l):
+                detil=DetilsReservation(refReservation=refM,
+                                        designation=G.get("designation")[i],
+                                        qte=G.get("qte")[i],
+                                        dateLivraison=G.get("dateLivraison")[i],
+                                        dateRetour=G.get("dateRetour")[i])
+                print(i)
+                detil.save()
 
-        )
-        r.save()
-        
-        g=list(d.items())
-        c=dict(g[5:])
-        print(d['refReservation'][0])
-        
-        # ref=Reservation.objects.filter(refReservation=d['refReservation'][0])[0]
       
-        
-        # for i in range(len(c['designation'])):
-        #     f=DetilsReservation(
-        #         refReservation=ref,
-        #         designation=c['designation'][i],
-        #         qte=c['qte'][i],
-        #         dateLivraison=c['dateLivraison'][i],
-        #         dateRetour=c['dateRetour'][i],
+               
 
-
-
-        #     )
-            
-        #     f.save()
-        
-      
-    
     
 
 
@@ -54,7 +51,7 @@ def reservations(request):
 
 def stock(request):
     materiel=Stock.objects.all()
-    print(materiel)
+    
     return render(request,'inventaire/stock.html',{
         'title':"Inventaire",
         'materiel':materiel
@@ -66,7 +63,7 @@ def detailStock(request, ref):
     mat=Stock.objects.filter(refMateriel=ref).values()[0]
     if (mat['categorie']=='GROUPE ELECTROGENE'):
         data=GroupeElectrogene.objects.filter(refMateriel=ref).values()[0]  
-    elif (mat['categorie']=='CABINE AUTONOME'):
+    elif (mat['categorie']=='CABINES AUTONOMES'):
         data=CabinesAutonome.objects.filter(refMateriel=ref).values()[0]  
     else:
         data=Modulaire.objects.filter(refMateriel=ref).values()[0]  
@@ -85,9 +82,40 @@ def detailStock(request, ref):
     })
 
 def addStock(request):
-    req=request.POST
-
-    print(req)
+    print(request.POST)
+    if request.method =='POST':
+        st=Stock(refMateriel=request.POST.get("refMateriel"),
+                designation=request.POST.get("designation"),
+                situation=request.POST.get("situation"),
+                lieu=request.POST.get("lieu"),
+                categorie=request.POST.get("categorie"))
+        if Stock.objects.filter(refMateriel=request.POST.get("refMateriel")).exists():
+            messages.warning(request,f"Pardon ce Réference {request.POST.get('refMateriel')} existe déja")
+        else :    
+            st.save()
+            messages.success(request,f"Vous avez ajouter {request.POST.get('refMateriel')} avec succés")
+            ref=Stock.objects.filter(refMateriel=request.POST.get("refMateriel"))[0]
+       
+            if request.POST.get("categorie")=="GROUPE ELECTROGENE" :
+                 ge=GroupeElectrogene(puissance=request.POST.get("puissance"),
+                                 marque=request.POST.get("marque"),
+                                 dimension=request.POST.get("dimensionGE"),
+                                 refMateriel=ref)
+                 ge.save()
+            
+            if request.POST.get("categorie")=="MODULAIRE" :
+                modulaire=Modulaire(gamme=request.POST.get("gammeModulaire"),
+                                    dimension=request.POST.get("dimensionModulaire"),
+                                    refMateriel=ref)
+                modulaire.save()    
+            
+            if request.POST.get("categorie")=="CABINES AUTONOMES" :
+                cabine=CabinesAutonome(gamme=request.POST.get("gammeCabine"),
+                                    dimension=request.POST.get("dimensionCabine"),
+                                    color=request.POST.get("color"),
+                                    refMateriel=ref)
+                cabine.save()
+    
     return render(request,'inventaire/addstock.html',{
         'title': 'Ajtouer element',
     })

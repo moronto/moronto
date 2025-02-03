@@ -2,179 +2,35 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    
 }
+
+body {
+    height: 100vh;
+    background: #9996
+
+}
+
+/* start base.html */
+
 .logo img{
-  width: 160px;
-  height: 160px;
-  margin: 20px auto;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 50px;
+    width: 200px;
+    height: 100px;
+    border-radius: 25px;
 }
-.sidebar{
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-    background-color: black;
-
+.action a{
+    margin-left: 30px;
 }
-.sidebody{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-.sidebody ul{
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 300px;
-    
-}
-.links{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-}
-.links a {
-    width: 80%;
-    padding: 5px 20px;
-    background-color: #333;
-    margin: 10px auto;
-    font-size: x-large;
-    text-decoration: none;
-    color: rgb(242, 242, 245);
-    font-weight: bold;
-    transition: .3s;
-   
-}
-.links a:hover{
-    transform: scale(1.05);
-    border: 2px solid red;
-    box-shadow: 0 0 20PX rgb(110, 3, 3),
-                0 0 40px rgb(78, 1, 1) ;
-    border-radius: 20px;   
-    background-color: azure;
-    color: black;         
-    
-}
-.sidefooter{
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-.br{
-    
-    display: block;
-    border: 1px solid lightgreen;
-    margin-bottom: 10px;
-}
-
-.content{
-    display: flex;
-    justify-content: center;
-    width: 100vw;
-}
-
-
-.bodycontent{
-    background-color: rgb(180, 180, 185);
-    width: 80%;
-    height: 100vh;
-    padding: 20px;
-
-}
-/* start page login */
-.login{
-    
-    display: flex;
-    gap: 3px;
-    height: 100vh;
-    flex: row wrap;
-    justify-content:center ;
-    align-items: center;
-    position: relative;
-    background-color: transparent;
-    
-}
-
-
-.cl1{
-    width: 400px;
-    margin: 50%;    
-}
-.cl1 input{
-    display: block;
-    border:none;
-    padding: 10px;
-    background-color: transparent;
-    border-radius: 50px;
-    border:1px solid red;
-    color: blue;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: large;
-}
-label{
-    color:black;
-    font-size: large;
-    font-weight: bold;
-}
-.cl1 input:hover{
-    border:1px solid grey;
-    outline: 2px solid salmon;
-}
-.frm .btn{
-    background-color: blue;
-    padding: 10px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    border: none;
-    margin-bottom:50px ;
-    border-radius: 30px;
-    background-image: linear-gradient(89deg,blue,black);
-    padding:10px 30px;
-    color:whitesmoke;
-    font-weight: 900;
-
-} 
-
 .frm{
-    padding:0 50px;
-    border:1px solid #eee;
-    border-radius: 15px;
-    box-shadow: 2px 2px 12px #09aef0;
-    background-image: linear-gradient(30deg,black,white);
-    color:aliceblue;
-    opacity: 0.6;
-}
-
-h2{
-    text-align: center;
-    height: 900;
-    color:red;
-    letter-spacing: 2px;
-}
-/* end page login */
-/* start stle stock */
-/* .body .row:nth-child(odd){
-    background-image: linear-gradient(0deg,#020744e8,transparent,blue);
-    font-size: medium;
-    
-    color:white
+    border:3px solid black;
+    box-shadow: 4px 6px 4px 2px rgb(19, 18, 18,0.7);
+    background-color: rgb(142, 158, 158);
 }
 
 
-.body .row:nth-child(even){
-    background-image: linear-gradient(0deg,#05093fe8,transparent,rgb(195, 195, 226));
-    font-size: medium;
-   
-    color: white;
-} */
+/* end base.html stock */
+
 .body .row {
     color:rgb(247, 244, 244);
     font-size: medium;
@@ -191,5 +47,28 @@ h2{
 .body .row:hover{
     background-color: #333;
 }
-
+.messages{
+    transition: .5s;
+    
+}
 /* end stle stock */
+/* start reservation.html */
+
+#detailReservation{
+    min-height:350px;
+    border: 1px solid black;
+    box-shadow: 4px 6px 4px 2px rgb(19, 18, 18,0.7);
+    border-radius: 8px;
+    
+}
+.headReservation, .footerReservation{
+    
+    border-radius: 8px;
+    border: 1px solid black;
+    box-shadow: 4px 6px 4px 2px rgb(19, 18, 18,0.7);
+    
+    padding:15px 0;
+
+}
+
+/* end reservation.html */

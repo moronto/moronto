@@ -15,7 +15,8 @@ class Reservation(models.Model):
     refReservation=models.CharField(max_length=20,primary_key=True,)
     chargerAffaire=models.CharField(max_length=20)
     dateReservation=models.DateField(auto_now=True)
-    etat=models.BooleanField()
+    client=models.CharField(max_length=50)
+    etat=models.CharField(max_length=20)
     def __str__(self):
         return self.refReservation
         
@@ -23,8 +24,8 @@ class Reservation(models.Model):
 class DetilsReservation(models.Model):
     refReservation=models.ForeignKey(Reservation, on_delete=models.CASCADE)
     designation=models.CharField(max_length=200)
-    qte=models.IntegerField()
-    dateLivraison=models.DateField()
+    qte=models.IntegerField(default=1)
+    dateLivraison=models.DateField(auto_now_add=True)
     dateRetour=models.DateField() 
     def __str__(self):
         return self.designation   
@@ -34,22 +35,22 @@ class DetilsReservation(models.Model):
 
     
 class Stock(models.Model):
-    etat=[("louer","LOUER"),
-          ("disponible","DISPONIBLE"),
-          ("vente","VENTE"),
-          ("don","DON"),
-          ("verifie","A VERIFIER"),
-          ("utiliser","UTILISER"),
-          ]
-    cat=[("GROUPE ELECTROGENE","GROUPE ELECTROGENE"),
-          ("MOUDULAIRE","MOUDULAIRE"),
-          ("CABINE AUTONOME","CABINE AUTONOME"),
-          ]
+    # etat=[("louer","LOUER"),
+    #       ("disponible","DISPONIBLE"),
+    #       ("vente","VENTE"),
+    #       ("don","DON"),
+    #       ("verifie","A VERIFIER"),
+    #       ("utiliser","UTILISER"),
+    #       ]
+    # cat=[("GROUPE ELECTROGENE","GROUPE ELECTROGENE"),
+    #       ("MOUDULAIRE","MOUDULAIRE"),
+    #       ("CABINE AUTONOME","CABINE AUTONOME"),
+    #       ]
     refMateriel=models.CharField(max_length=50,primary_key=True) 
     designation=models.CharField(max_length=100) 
-    situation=models.CharField(max_length=50,choices=etat)
+    situation=models.CharField(max_length=50)
     lieu=models.CharField(max_length=100)
-    categorie=models.CharField(max_length=50,choices=cat)
+    categorie=models.CharField(max_length=50)
 
     def __str__(self):
         return self.refMateriel

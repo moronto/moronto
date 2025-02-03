@@ -12,35 +12,50 @@
 </head>
 <body>
     {% comment %} start navbar {% endcomment %}
-    <div class="content">
-    <div class="sidebar">
-      <div class="sidebody">
-        
-
-          <div class="logo">
-            <img src="{% static 'images/logo.jpg' %}"   alt="logo de societe">
-          </div>
+   
     
-          <div class="links">
-            <a href="">Dashboord</a>
-            <a href="">Mouvement</a>
-            <a href="{% url 'reservations' %}">Reservations</a>
-            <a href="{% url 'stock' %}">Inventaire</a>
-          </div>
-    
-        
-      </div>
-      <div class="sidefooter">
-        <div class="br"></div>
-        <h1 class="links"><a href="{% url 'login' %}">login</a></h1>
-      </div>
 
-    </div>
-    <div class="bodycontent">
+    <nav class="navbar navbar-brand bg-light px-3 w-100 sticky-top ">
+      <a class="navbar-brand" href="{% url 'home'%}">
+        <img src="{% static 'images/ATOUT.png'%}" class="img-fluid" width="200px" height="100px">
+      </a>
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
+       
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Gestion Stock</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'addstock' %}">Ajouter Materiel</a></li>
+            <li><a class="dropdown-item" href="{% url 'stock' %}">Afficher Stock</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Gestion Reservation</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'reservations' %}">Ajouter Reservation</a></li>
+           
+          </ul>
+        </li>
+
+      </ul>
+    </nav>
+    
+
+
+
+
+
+
+
+
+    <div class="container">
+      
       {% block content %}
-    {% endblock content %}
+      {% endblock content %}
+      
     </div>
-  </div>
     {% comment %} end navbar {% endcomment %}
 
     

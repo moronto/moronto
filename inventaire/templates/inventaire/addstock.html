@@ -1,105 +1,179 @@
-{% extends 'base.html' %}
-
-
-{% block content %}
-<h1>Ajouter un Element </h1>
-<form  method="post" >
-    {% csrf_token %}
-<div class=" m-auto mt-5 bg-light p-4 ">
-    <div class="row  mt-2">
-        <div class="col-md-4 fs-4 text-dark ">Réference de Materiel</div>
-        
-        <div class="col-md-8"><input name="refMateriel" type="text" class="form-control fs-4 text-secondary text-uppercase"></div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-md-4 fs-4 text-dark">Designations</div>
-        
-        <div class="col-md-8"><input name="designation" type="text" class="form-control fs-4 text-secondary text-uppercase"></div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-md-4 fs-4 text-dark">Situation</div>
-        
-        <div class="col-md-8">
-            <select name="situation" class="form-select" id="situation" onchange="">
-                <option selected>Selectioner...</option>
-                <option value="1">DISPONIBLE</option>
-                <option value="2">LOUER</option>
-                <option value="3">VENTE</option>
-                <option value="4">A VERIFIER</option>
-                <option value="5">UTILISER</option>
-                <option value="6">DETERIORER</option>
-                <option value="7">DON</option>
-              </select>
-        </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-md-4 fs-4 text-dark">Emplacement</div>
-        
-        <div class="col-md-8"><input name="lieu" type="text" class="form-control fs-4 text-secondary text-uppercase"></div>
-    </div>
-    <div class="row mt-2">
-        <div class="col-md-4 fs-4 text-dark">Categorie</div>
-        
-        <div class="col-md-8">
-            <select name="categorie" class="form-select" id="cat" onchange="displayBlocs()">
-                <option selected>Selectioner...</option>
-                <option value="1">GROUPE ELECTROGENE</option>
-                <option value="2">MODULAIRE</option>
-                <option value="3">CABINES AUTONOMES</option>
-              </select>
-        </div>
-    </div>
-
-    <div id="GE" style="display: none;">
-        <div class="row mt-2">
-            <div class="col-md-4 fs-4 text-dark">Puissance</div>
-            <div class="col-md-8"><input name="puissance" type="text" class="form-control fs-4 text-secondary text-uppercase"></div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-md-4 fs-4 text-dark">Marque</div>
-            <div class="col-md-8"><input name="marque" type="text" class="form-control fs-4 text-secondary text-uppercase"></div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-md-4 fs-4 text-dark">Dimension</div>
-            <div class="col-md-8"><input name="dimension" type="text" class="form-control fs-4 text-secondary text-uppercase"></div>
-        </div>
-        <div class="row mt-3"><input type="submit" class="btn btn-success" value="Enregistrer"></div>
-
-    </div>
-    
-    <div id="cabine" style="display: none;">
-        <div class="row mt-2">
-            <div class="col-md-4 fs-4 text-dark">Gamme</div>
-            <div class="col-md-8"><input  name="gamme" type="text" class="form-control fs-4 text-secondary text-uppercase"></div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-md-4 fs-4 text-dark">Dimension</div>
-            <div class="col-md-8"><input name="dimension" type="text" class="form-control fs-4 text-secondary text-uppercase"></div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-md-4 fs-4 text-dark">Color</div>
-            <div class="col-md-8"><input name="color" type="text" class="form-control fs-4 text-secondary text-uppercase"></div>
-        </div>
-        <div class="row mt-3"><input type="submit" class="btn btn-success" value="Enregistrer"></div>
-
-    </div>
-    <div id="modulaire" style="display: none;">
-        <div class="row mt-2">
-            <div class="col-md-4 fs-4 text-dark">Gamme</div>
-            <div class="col-md-8"><input name="gamme" type="text" class="form-control fs-4 text-secondary text-uppercase"></div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-md-4 fs-4 text-dark">Dimension</div>
-            <div class="col-md-8"><input name="dimension" type="text" class="form-control fs-4 text-secondary text-uppercase"></div>
-        </div>
-        <div class="row mt-3"><input type="submit" class="btn btn-success" value="Enregistrer"></div>
-        
-    </div>
-
-
+{% extends 'base.html' %} {% block content %}
+<h1 class="text-center m-2 text-danger">Ajouter un Element</h1>
+<div class="messages">
+  {% if messages %}
+  {% for msg in messages %}
+    <div {% if msg.tags%} class="alert alert-{{msg.tags}} {% endif%}">{{msg}}</div>
+  {% endfor %}
+{% endif %}
 </div>
+<form method="post">
+  {% csrf_token %}
+  <div class="m-auto   p-4 w-75 frm">
+    <div class="row mt-2">
+      <div class="col-md-4 fs-4 text-dark">Réference de Materiel</div>
+
+      <div class="col-md-8">
+        <input
+          name="refMateriel"
+          type="text"
+          class="form-control fs-4 text-secondary text-uppercase"
+        />
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-4 fs-4 text-dark">Designations</div>
+
+      <div class="col-md-8">
+        <input
+          name="designation"
+          type="text"
+          class="form-control fs-4 text-secondary text-uppercase"
+        />
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-4 fs-4 text-dark">Situation</div>
+
+      <div class="col-md-8">
+        <select name="situation" class=" form-select" id="situation" onchange="">
+          <option selected>Selectioner...</option>
+          <option value="DISPONIBLE">DISPONIBLE</option>
+          <option value="LOUER">LOUER</option>
+          <option value="VENTE">VENTE</option>
+          <option value="A VERIFIER">A VERIFIER</option>
+          <option value="UTILISER">UTILISER</option>
+          <option value="DETERIORER">DETERIORER</option>
+          <option value="DON">DON</option>
+        </select>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-4 fs-4 text-dark">Emplacement</div>
+
+      <div class="col-md-8">
+        <input
+          name="lieu"
+          type="text"
+          class="form-control fs-4 text-secondary text-uppercase"
+        />
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-4 fs-4 text-dark">Categorie</div>
+
+      <div class="col-md-8">
+        <select
+          name="categorie"
+          class="form-select"
+          id="cat"
+          onchange="displayBlocs()"
+        >
+          <option selected>Selectioner...</option>
+          <option value="GROUPE ELECTROGENE">GROUPE ELECTROGENE</option>
+          <option value="MODULAIRE">MODULAIRE</option>
+          <option value="CABINES AUTONOMES">CABINES AUTONOMES</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="GE" style="display: none">
+      <div class="row mt-2">
+        <div class="col-md-4 fs-4 text-dark">Puissance</div>
+        <div class="col-md-8">
+          <input
+            name="puissance"
+            type="text"
+            class="form-control fs-4 text-secondary text-uppercase"
+          />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-4 fs-4 text-dark">Marque</div>
+        <div class="col-md-8">
+          <input
+            name="marque"
+            type="text"
+            class="form-control fs-4 text-secondary text-uppercase"
+          />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-4 fs-4 text-dark">Dimension</div>
+        <div class="col-md-8">
+          <input
+            name="dimensionGE"
+            type="text"
+            class="form-control fs-4 text-secondary text-uppercase"
+          />
+        </div>
+      </div>
+      <div class="row mt-3">
+        <input type="submit" class="btn btn-success" value="Enregistrer" />
+      </div>
+    </div>
+
+    <div id="cabine" style="display: none">
+      <div class="row mt-2">
+        <div class="col-md-4 fs-4 text-dark">Gamme</div>
+        <div class="col-md-8">
+          <input
+            name="gammeCabine"
+            type="text"
+            class="form-control fs-4 text-secondary text-uppercase"
+          />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-4 fs-4 text-dark">Dimension</div>
+        <div class="col-md-8">
+          <input
+            name="dimensionCabine"
+            type="text"
+            class="form-control fs-4 text-secondary text-uppercase"
+          />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-4 fs-4 text-dark">Color</div>
+        <div class="col-md-8">
+          <input
+            name="color"
+            type="text"
+            class="form-control fs-4 text-secondary text-uppercase"
+          />
+        </div>
+      </div>
+      <div class="row mt-3">
+        <input type="submit" class="btn btn-success" value="Enregistrer" />
+      </div>
+    </div>
+    <div id="modulaire" style="display: none">
+      <div class="row mt-2">
+        <div class="col-md-4 fs-4 text-dark">Gamme</div>
+        <div class="col-md-8">
+          <input
+            name="gammeModulaire"
+            type="text"
+            class="form-control fs-4 text-secondary text-uppercase"
+          />
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-4 fs-4 text-dark">Dimension</div>
+        <div class="col-md-8">
+          <input
+            name="dimensionModulaire"
+            type="text"
+            class="form-control fs-4 text-secondary text-uppercase"
+          />
+        </div>
+      </div>
+      <div class="row mt-3">
+        <input type="submit" class="btn btn-success" value="Enregistrer" />
+      </div>
+    </div>
+  </div>
 </form>
-
-
 
 {% endblock content %}

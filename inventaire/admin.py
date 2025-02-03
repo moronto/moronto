@@ -10,7 +10,7 @@ class ChargesaffaireAdmin(admin.ModelAdmin):
 admin.site.register(Chargesaffaire,ChargesaffaireAdmin)
 
 class ReservationAdmin(admin.ModelAdmin):
-    list_display=("refReservation","chargerAffaire","dateReservation","etat")
+    list_display=("refReservation","chargerAffaire","dateReservation","client","etat")
 admin.site.register(Reservation,ReservationAdmin)
 
 class DetilsReservationAdmin(admin.ModelAdmin):

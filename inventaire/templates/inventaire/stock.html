@@ -6,22 +6,28 @@
 </h1>
 
 <div class="row bg-black pt-2 pb-2 text-white ">
-    <div class="col-md-2 ">Réference</div>
+    <div class="col-md-1 ">Réference</div>
     <div class="col-md-4 ">Designation</div>
-    <div class="col-md-2 ">Situation</div>
+    <div class="col-md-1 ">Situation</div>
     <div class="col-md-2 ">Emplacement</div>
     <div class="col-md-2 ">Categorie</div>    
+    <div class="col-md-2 text-center">Actions</div>    
 </div>
 <div class="body">
 
     {% for mat in materiel%}
     <div class="row  pt-2 pb-2 ">
-        <div class="col-md-2 "><a href="{% url 'detailStock' mat.refMateriel %}" class="btn p-0">{{mat.refMateriel}}</a></div>
+        <div class="col-md-1 ">{{mat.refMateriel}}</div>
         <div class="col-md-4 ">{{mat.designation}}</div>
-        <div class="col-md-2 ">{{mat.situation}}</div>
+        <div class="col-md-1 ">{{mat.situation}}</div>
         <div class="col-md-2 ">{{mat.lieu}}</div>
         <div class="col-md-2 ">{{mat.categorie}}</div>    
-    </div>
+        <div class="col-md-2 action">
+            <a href="{% url 'detailStock' mat.refMateriel %}"><i class='fa fa-file  fa-2x text-success'></i></a>
+            <a href=''><i class='fa fa-edit  fa-2x  text-warning'></i></a>    
+            <a href=''><i class='fa fa-trash fa-2x  text-danger'></i></a>
+        </div>    
+    </div> 
     {% endfor%}
 </div>
 
