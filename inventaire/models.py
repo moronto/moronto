@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import RegexValidator
 
 class Chargesaffaire(models.Model):
     
@@ -12,7 +13,7 @@ class Chargesaffaire(models.Model):
 
 class Reservation(models.Model):
     
-    refReservation=models.CharField(max_length=20,primary_key=True,)
+    refReservation=models.CharField(max_length=20,primary_key=True, )
     chargerAffaire=models.CharField(max_length=20)
     dateReservation=models.DateField(auto_now=True)
     client=models.CharField(max_length=50)

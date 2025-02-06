@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
 from django.contrib import messages
 def home(request):
@@ -10,7 +10,7 @@ def login(request):
     return render(request,'inventaire/login.html')
 
 
-def reservations(request):
+def addreservation(request):
 
     req=request.POST
     if request.method=='POST':
@@ -40,15 +40,22 @@ def reservations(request):
                 print(i)
                 detil.save()
 
-      
-               
+    return render(request,'inventaire/addreservation.html')
 
+def reservations(request):
     
-
-
-    return render(request,'inventaire/reservations.html')
-
-
+    data=Reservation.objects.all()
+    if request.method=='POST':
+        data=Reservation.objects.all()
+    
+    return render(request,'inventaire/reservations.html',{
+        'title':'Reservations',
+        'data':data
+    })
+def deleteReservation(request, ref):
+    r=Reservation.objects.get(refReservation=ref)
+    r.delete()
+    return redirect("reservations")
 def stock(request):
     materiel=Stock.objects.all()
     
@@ -82,7 +89,6 @@ def detailStock(request, ref):
     })
 
 def addStock(request):
-    print(request.POST)
     if request.method =='POST':
         st=Stock(refMateriel=request.POST.get("refMateriel"),
                 designation=request.POST.get("designation"),

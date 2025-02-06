@@ -1,0 +1,74 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="row">
+<h1 class="col-md-3">Reservation</h1>
+{% if messages %}
+<div class="col-md-9 messages">
+    {% for msg in messages%}
+        <div class="alert alert-{{msg.tags}} p-2 m-0">{{msg}}</div>
+    {% endfor%}
+</div>
+{% endif %}
+</div>
+<div class="formReservation ">
+    <form  id='reservationForm' method="post">
+        {% csrf_token %}
+        <div class="row headReservation ">
+            <div class="col-md-3">
+                <label for="dateReservation">Date de reservation</label>
+            <input type="date" id="dateReservation" name="dateReservation" required class="form-control ">
+            </div>
+            <div class="col-md-3">
+                <label for="refReservation">Réference de reservation</label>
+            <input type="text" id="refReservation" name="refReservation" pattern='^\d+-\d+$' required class="form-control ">
+        </div>
+            <div class="col-md-3">
+                <label for="chargerAffaire">Chargee d'affaire</label>
+                <input type="text" id="chargerAffaire" name="chargerAffaire" required class="form-control ">
+            </div>
+            <div class="col-md-3">
+                <label for="client">Client</label>
+                <input type="text" id="client" name="client" required class="form-control ">
+            </div>
+        </div>
+        <div  class="row ">
+            <h4 class="mt-2">Details de Reservation : 
+            </h4>
+            
+            <div id="detailReservation" class=" p-2 ">
+                <div id="first" class="row">
+                    <div class="col-md-3">
+                        <label for="designation">Designation</label>
+                        <input type="text" id="designation" name="designation" class="form-control ">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="qte">Quantité</label>
+                        <input type="text" id="qte" name="qte" class="form-control ">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="dateLivraison">Date de Livraison</label>
+                        <input type="date"  id="dateLivraison" name="dateLivraison" onchange="checkdate()" class="form-control ">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="dateRetour">Date de Retour</label>
+                        <input type="date" id="dateRetour" name="dateRetour" onchange="checkdate()" class="form-control ">
+                    </div>
+                </div>
+                
+            </div>
+            
+            
+        </div>
+        <div class="row mt-3  justify-content-around p-2 footerReservation">
+            <input type="submit" class="btn btn-success w-25" value="Enregistrer">
+            <input type="button" class="btn btn-success  w-25" onclick="addLigne()" value="Ajouter un Ligne">
+            <input type="button" class="btn btn-danger   w-25" onclick="deletLigne()" value="Suprimer un ligne">
+        </div>
+        
+        
+        
+    </form>
+</div>   
+
+{% endblock content %} 

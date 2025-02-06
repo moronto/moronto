@@ -69,3 +69,16 @@ function checkdate(){
 
     }
 }
+
+const refInput = document.getElementById('refReservation');
+// const errorMessage = document.getElementById('errorMessage');
+const form = document.getElementById('reservationForm');
+
+
+
+form.addEventListener('submit', function (event) {
+    if (!refInput.validity.valid) {
+        event.preventDefault(); // Empêche la soumission du formulaire si la saisie est invalide
+        alert('Veuillez corriger la saisie avant de soumettre le formulaire.');
+    }
+});
