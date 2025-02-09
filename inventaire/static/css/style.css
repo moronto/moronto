@@ -4,11 +4,15 @@
     padding: 0;
     box-sizing: border-box;
     
+}.w-90{
+    width: 95%;
+    margin:auto;
 }
 
 body {
     height: 100vh;
-    background: #9996
+    background:#BBB
+       
 
 }
 
@@ -56,17 +60,16 @@ body {
 
 #detailReservation{
     min-height:350px;
+    border-radius: 8px;
     border: 1px solid black;
     box-shadow: 4px 6px 4px 2px rgb(19, 18, 18,0.7);
-    border-radius: 8px;
     
 }
-.headReservation, .footerReservation{
+.borderShadaw{
     
     border-radius: 8px;
     border: 1px solid black;
     box-shadow: 4px 6px 4px 2px rgb(19, 18, 18,0.7);
-    
     padding:15px 0;
 
 }

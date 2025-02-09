@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from .models import *
 from django.contrib import messages
+from .forms import *
+from datetime import datetime
 def home(request):
     return render(request,'inventaire/home.html',{
         'title':"ATOULOC"
@@ -11,36 +13,48 @@ def login(request):
 
 
 def addreservation(request):
-
+    refReservation=''
     req=request.POST
+    lastRef=Reservation.objects.order_by("refReservation").last().__str__()
+    actualYear=datetime.now().strftime("%Y").strip()
+    i=lastRef.find('-')
+    beginRef=int(lastRef[:i])
+    if  lastRef[i+1:] == actualYear:
+        beginRef+=1
+        refReservation=f"{beginRef}-{actualYear}"
+        
+        
+    else: 
+        beginRef=1
+        refReservation=f"{beginRef}-{actualYear}"
+        print(refReservation)
+    
+
     if request.method=='POST':
-       r=Reservation(refReservation=req.get('refReservation'),
+        r=Reservation(refReservation=refReservation,
                      chargerAffaire=req.get('chargerAffaire'),
                      dateReservation=req.get('dateReservation'),
                      client=req.get('client'),
                      etat='En cours',
+                     created_at=datetime.now(),
                      )
-       if Reservation.objects.filter(refReservation=req.get('refReservation')).exists():
-            messages.warning(request,f"Pardon {req.get('refReservation')} exist deja ")
-       else :
-            r.save()
-            messages.success(request,f"Vous avez ajouter {req.get('refReservation')} avec succes ")
-            G=dict(req)
+     
+        r.save()
+        messages.success(request,f"Vous avez ajouter {req.get('refReservation')} avec succes ")
+        G=dict(req)
 
-            refM=Reservation.objects.filter(refReservation=req.get('refReservation'))[0]
-            l=len(G.get("designation"))
-            print(refM)
-           
-            for i in range(l):
-                detil=DetilsReservation(refReservation=refM,
+        refM=Reservation.objects.get(refReservation=refReservation)
+        l=len(G.get("designation"))
+   
+        for i in range(l):
+             detil=DetilsReservation(refReservation=refM,
                                         designation=G.get("designation")[i],
                                         qte=G.get("qte")[i],
                                         dateLivraison=G.get("dateLivraison")[i],
                                         dateRetour=G.get("dateRetour")[i])
-                print(i)
-                detil.save()
-
-    return render(request,'inventaire/addreservation.html')
+             detil.save()
+    charge=Chargesaffaire.objects.all()
+    return render(request,'inventaire/addreservation.html',{'charge':charge})
 
 def reservations(request):
     
@@ -56,6 +70,10 @@ def deleteReservation(request, ref):
     r=Reservation.objects.get(refReservation=ref)
     r.delete()
     return redirect("reservations")
+def deleteDetailReservation(request, id,ref):
+    r=DetilsReservation.objects.get(id=id)
+    r.delete()
+    return redirect(f"/detailReservation/{ref}")
 def stock(request):
     materiel=Stock.objects.all()
     
@@ -64,6 +82,11 @@ def stock(request):
         'materiel':materiel
 
     })
+def detailReservation(request,ref):
+    r=DetilsReservation.objects.filter(refReservation=ref)
+    print(r)
+
+    return render(request,"inventaire/detailReservation.html",{'title':'Details Reservation', 'reservation':r})
 
 def detailStock(request, ref):
 

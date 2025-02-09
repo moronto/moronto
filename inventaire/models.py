@@ -18,6 +18,7 @@ class Reservation(models.Model):
     dateReservation=models.DateField(auto_now=True)
     client=models.CharField(max_length=50)
     etat=models.CharField(max_length=20)
+    created_at=models.DateTimeField(auto_created=True)
     def __str__(self):
         return self.refReservation
         

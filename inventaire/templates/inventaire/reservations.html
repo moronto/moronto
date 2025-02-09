@@ -2,40 +2,54 @@
 
 {% block content %}
 
-<div class="row bg-black pt-2 pb-2 text-white">
-    <div class="col-md-2">date reservation</div>
-    <div class="col-md-2">Reference</div>
-    <div class="col-md-2">Charge d'affaire</div>
-    <div class="col-md-2">Client</div>
-    <div class="col-md-2">Etat</div>
-    <div class="col-md-2">Action</div>
+<div class=" borderShadaw p-2 bg-light mr-5 mt-5">
+    
+    <table class="table table-striped">
+        <thead class="table-dark text-center fs-4 fs-bold ">
+            <tr>
+                <td>date reservation</td>
+                <td>Reference</td>
+                <td>Charge d'affaire</td>
+                <td>Client</td>
+                <td>Etat</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dt in data %}
+             <tr>
+                <td>{{dt.dateReservation|date:'d/m/Y'}}</td>
+                <td>{{dt.refReservation}}</td>
+                <td>{{dt.chargerAffaire}}</td>
+                <td>{{dt.client}}</td>
+                <td>{{dt.etat}}</td>
+                <td>
+                    <div class="row justify-content-between">
+                        <a class="col-md-4" href="{% url 'detailReservation' dt.refReservation %}">
+                            <i class="fa fa-file  fa-2x text-success "></i>
+                        </a>
+                        <a class="col-md-4" href='#'>
+                            <i class='fa fa-edit  fa-2x  text-warning '></i>
+                        </a>    
+                        <a class="col-md-4" href="{% url 'deleteReservation' dt.refReservation %}">
+                            <i class='fa fa-trash fa-2x  text-danger '></i>
+                        </a>
+                    </div>
+                    
+                </td>
+             </tr>   
+            {% endfor %}
+        </tbody>
+
+
+    </table>
     
 </div>
 
-{% for dt in data %}
-<div class="body">
-    <div class="row pt-2 pb-2">
-        <div class="col-md-2">{{dt.dateReservation}}</div>
-        <div class="col-md-2">{{dt.refReservation}}</div>
-        <div class="col-md-2">{{dt.chargerAffaire}}</div>
-        <div class="col-md-2">{{dt.client}}</div>
-        <div class="col-md-2">{{dt.etat}}</div>
-        <div class="col-md-2 action">
-            <a href="{% url 'deleteReservation' dt.refReservation %}">
-                <i class="fa fa-file  fa-2x text-success"></i>
-            </a>
-            <a href='#'>
-                <i class='fa fa-edit  fa-2x  text-warning'></i>
-            </a>    
-            <a href='#'>
-                <i class='fa fa-trash fa-2x  text-danger'></i>
-            </a>
-        </div>
         
-    </div>
-</div>
 
 
-{% endfor%}
+
+
 
 {% endblock content %}
