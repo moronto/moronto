@@ -4,11 +4,11 @@
 <div class="row">
 <h1 class="col-md-3">Reservation</h1>
 {% if messages %}
-<div class="col-md-9 messages">
+
     {% for msg in messages%}
-        <div class="alert alert-{{msg.tags}} p-2 m-0">{{msg}}</div>
+        <div class="alert-container alert alert-{{msg.tags}} p-2 m-0 alert-dismissible fade show">{{msg}}</div>
     {% endfor%}
-</div>
+
 {% endif %}
 </div>
 <div class="formReservation ">
@@ -19,10 +19,7 @@
                 <label for="dateReservation">Date de reservation</label>
             <input type="date" id="dateReservation" name="dateReservation" required class="form-control ">
             </div>
-            {% comment %} <div class="col-md-3">
-                <label for="refReservation">Réference de reservation</label>
-                <input type="text" id="refReservation" name="refReservation" pattern='^\d+-\d+$' required class="form-control ">
-             </div> {% endcomment %}
+         
             <div class="col-md-4">
                 <label for="chargerAffaire">Chargee d'affaire</label>
                

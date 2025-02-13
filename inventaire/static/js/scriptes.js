@@ -82,3 +82,5 @@ form.addEventListener('submit', function (event) {
         alert('Veuillez corriger la saisie avant de soumettre le formulaire.');
     }
 });
+
+

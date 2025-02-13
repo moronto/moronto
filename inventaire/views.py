@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .models import *
 from django.contrib import messages
 from .forms import *
-from datetime import datetime
+from datetime import timezone,datetime
 def home(request):
     return render(request,'inventaire/home.html',{
         'title':"ATOULOC"
@@ -11,35 +11,50 @@ def home(request):
 def login(request):
     return render(request,'inventaire/login.html')
 
-
 def addreservation(request):
+    if request.method=='POST':
+        currentYear=datetime.now().strftime("%Y").strip()
+        reservation=Reservation.objects.all()
+        if reservation.count()==0:
+            refReservation = f'1-{currentYear}'
+            print(refReservation)
+        print('izrid win yadawen')
+
+
+    return render(request,'inventaire/addreservation.html')
+def addreservationA(request):
     refReservation=''
     req=request.POST
-    lastRef=Reservation.objects.order_by("refReservation").last().__str__()
+    lastRef=Reservation.objects.all().order_by("created_at").last().__str__()
+    print('this is ',lastRef, f'and {type(lastRef)}')
     actualYear=datetime.now().strftime("%Y").strip()
-    i=lastRef.find('-')
-    beginRef=int(lastRef[:i])
-    if  lastRef[i+1:] == actualYear:
-        beginRef+=1
-        refReservation=f"{beginRef}-{actualYear}"
+    if  lastRef== 'None':
+        raise ValueError('La badse de donnes est vide') 
+    # i=lastRef.find('-')
+    # beginRef=int(lastRef[:i])
+    # if  lastRef[i+1:] == actualYear:
+    #     beginRef+=1
+    #     refReservation=f"{beginRef}-{actualYear}"
         
         
-    else: 
-        beginRef=1
-        refReservation=f"{beginRef}-{actualYear}"
-        print(refReservation)
-    
-
+    # else: 
+    #     beginRef=1
+    #     refReservation=f"{beginRef}-{actualYear}"
+        
     if request.method=='POST':
-        r=Reservation(refReservation=refReservation,
-                     chargerAffaire=req.get('chargerAffaire'),
-                     dateReservation=req.get('dateReservation'),
-                     client=req.get('client'),
-                     etat='En cours',
-                     created_at=datetime.now(),
-                     )
-     
-        r.save()
+        if Reservation.objects.filter(refReservation=req.get('refReservation')).exists():
+            messages.warning(request,f'la reservation {refM} est deja exite ')
+            exit
+        else:
+            r=Reservation(refReservation=refReservation,
+                        chargerAffaire=req.get('chargerAffaire'),
+                        dateReservation=req.get('dateReservation'),
+                        client=req.get('client'),
+                        etat='En cours',
+                        created_at=datetime.now(),
+                        )
+        
+            r.save()
         messages.success(request,f"Vous avez ajouter {req.get('refReservation')} avec succes ")
         G=dict(req)
 
@@ -47,12 +62,16 @@ def addreservation(request):
         l=len(G.get("designation"))
    
         for i in range(l):
-             detil=DetilsReservation(refReservation=refM,
-                                        designation=G.get("designation")[i],
-                                        qte=G.get("qte")[i],
-                                        dateLivraison=G.get("dateLivraison")[i],
-                                        dateRetour=G.get("dateRetour")[i])
-             detil.save()
+             if Reservation.objects.filter(refReservation=refM).exists():
+                    messages.warning(request,f'La reservation {refM} est deja existe ')
+                    break
+             else:
+                detil=DetilsReservation(refReservation=refM,
+                                            designation=G.get("designation")[i],
+                                            qte=G.get("qte")[i],
+                                            dateLivraison=G.get("dateLivraison")[i],
+                                            dateRetour=G.get("dateRetour")[i])
+                detil.save()
     charge=Chargesaffaire.objects.all()
     return render(request,'inventaire/addreservation.html',{'charge':charge})
 

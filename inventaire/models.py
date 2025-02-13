@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.core.validators import RegexValidator
 
 class Chargesaffaire(models.Model):
@@ -15,10 +16,10 @@ class Reservation(models.Model):
     
     refReservation=models.CharField(max_length=20,primary_key=True, )
     chargerAffaire=models.CharField(max_length=20)
-    dateReservation=models.DateField(auto_now=True)
+    dateReservation=models.DateField(default=timezone.now())
     client=models.CharField(max_length=50)
     etat=models.CharField(max_length=20)
-    created_at=models.DateTimeField(auto_created=True)
+    created_at=models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.refReservation
         
@@ -27,8 +28,8 @@ class DetilsReservation(models.Model):
     refReservation=models.ForeignKey(Reservation, on_delete=models.CASCADE)
     designation=models.CharField(max_length=200)
     qte=models.IntegerField(default=1)
-    dateLivraison=models.DateField(auto_now_add=True)
-    dateRetour=models.DateField() 
+    dateLivraison=models.DateField(default=timezone.now())
+    dateRetour=models.DateField(default=timezone.now()) 
     def __str__(self):
         return self.designation   
     
