@@ -53,11 +53,7 @@ function displayBlocs(){
     
 }
 
-window.setTimeout(() => {
 
-    document.querySelector('.messages').style.display="none"
-    
-}, 5000);
 
 
 function checkdate(){
@@ -70,17 +66,21 @@ function checkdate(){
     }
 }
 
-const refInput = document.getElementById('refReservation');
-// const errorMessage = document.getElementById('errorMessage');
-const form = document.getElementById('reservationForm');
+
+//JQUERY
+
+$(document).ready(function(){
+
+    $(".messages").animate({
+        top:100
+    },1000).delay(4000)
+   
+    $(".messages").animate({
+     left:-1000
+
+    },1000).fadeOut(2000)
 
 
-
-form.addEventListener('submit', function (event) {
-    if (!refInput.validity.valid) {
-        event.preventDefault(); // Empêche la soumission du formulaire si la saisie est invalide
-        alert('Veuillez corriger la saisie avant de soumettre le formulaire.');
-    }
 });
 
 

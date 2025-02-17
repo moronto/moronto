@@ -1,11 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <h1 class="text-center m-2 text-danger">Ajouter un Element</h1>
 <div class="messages">
-  {% if messages %}
-  {% for msg in messages %}
-    <div {% if msg.tags%} class="alert alert-{{msg.tags}} {% endif%}">{{msg}}</div>
-  {% endfor %}
-{% endif %}
+
 </div>
 <form method="post">
   {% csrf_token %}

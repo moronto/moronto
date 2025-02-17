@@ -13,7 +13,13 @@
 
 <body>
     {% comment %} start navbar {% endcomment %}
-   
+    {% if messages %}
+
+    {% for msg in messages%}
+        <div class="alert alert-{{msg.tags}} p-2 m-0 messages">{{msg}}</div>
+    {% endfor%}
+
+{% endif %}
     
 
     <nav class="navbar navbar-brand bg-light px-3 w-100 sticky-top ">
@@ -35,8 +41,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Gestion Reservation</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'addreservation' %}">Ajouter Reservation</a></li>
             <li><a class="dropdown-item" href="{% url 'reservations' %}">Reservations</a></li>
+            <li><a class="dropdown-item" href="{% url 'addreservation' %}">Ajouter Reservation</a></li>
            
           </ul>
         </li>
@@ -62,7 +68,9 @@
 
     
 
-<script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>       
+<script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>  
+<script src="{% static 'js/jquery-3.7.1.min.js'%}"></script>  
+
 <script src="{% static 'js/scriptes.js'%}"></script>       
 
 </body>

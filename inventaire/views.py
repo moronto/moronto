@@ -13,39 +13,30 @@ def login(request):
 
 def addreservation(request):
     if request.method=='POST':
+        
+        req=request.POST
+
         currentYear=datetime.now().strftime("%Y").strip()
+        global reservation
+        
         reservation=Reservation.objects.all()
-        if reservation.count()==0:
+        print(reservation)
+        refs=[]
+        for r in reservation:
+            print(type(r))
+        print(refs)    
+        if Reservation.objects.count()==0 or reservation['refReservation'][-4:]!=currentYear:
             refReservation = f'1-{currentYear}'
-            print(refReservation)
-        print('izrid win yadawen')
 
-
-    return render(request,'inventaire/addreservation.html')
-def addreservationA(request):
-    refReservation=''
-    req=request.POST
-    lastRef=Reservation.objects.all().order_by("created_at").last().__str__()
-    print('this is ',lastRef, f'and {type(lastRef)}')
-    actualYear=datetime.now().strftime("%Y").strip()
-    if  lastRef== 'None':
-        raise ValueError('La badse de donnes est vide') 
-    # i=lastRef.find('-')
-    # beginRef=int(lastRef[:i])
-    # if  lastRef[i+1:] == actualYear:
-    #     beginRef+=1
-    #     refReservation=f"{beginRef}-{actualYear}"
-        
-        
-    # else: 
-    #     beginRef=1
-    #     refReservation=f"{beginRef}-{actualYear}"
-        
-    if request.method=='POST':
-        if Reservation.objects.filter(refReservation=req.get('refReservation')).exists():
-            messages.warning(request,f'la reservation {refM} est deja exite ')
-            exit
+            print("ahya kighan dghi",refReservation)
         else:
+            i=reservation['refReservation'].find('-')
+            num=int(reservation['refReservation'][:i])
+
+            refReservation=f'{num+1}-{currentYear}'
+            print("anuk nit",refReservation)
+
+        try:
             r=Reservation(refReservation=refReservation,
                         chargerAffaire=req.get('chargerAffaire'),
                         dateReservation=req.get('dateReservation'),
@@ -55,26 +46,56 @@ def addreservationA(request):
                         )
         
             r.save()
-        messages.success(request,f"Vous avez ajouter {req.get('refReservation')} avec succes ")
-        G=dict(req)
-
-        refM=Reservation.objects.get(refReservation=refReservation)
-        l=len(G.get("designation"))
+            refM=Reservation.objects.get(refReservation=refReservation)
+            G=dict(req)
+            l=len(G.get("designation"))
    
-        for i in range(l):
-             if Reservation.objects.filter(refReservation=refM).exists():
-                    messages.warning(request,f'La reservation {refM} est deja existe ')
-                    break
-             else:
+            for i in range(l):
                 detil=DetilsReservation(refReservation=refM,
-                                            designation=G.get("designation")[i],
-                                            qte=G.get("qte")[i],
-                                            dateLivraison=G.get("dateLivraison")[i],
-                                            dateRetour=G.get("dateRetour")[i])
+                                         designation=G.get("designation")[i],
+                                         qte=G.get("qte")[i],
+                                         dateLivraison=G.get("dateLivraison")[i],
+                                         dateRetour=G.get("dateRetour")[i])
                 detil.save()
-    charge=Chargesaffaire.objects.all()
+            messages.success(request,f"Vous avez ajouter {refM} avec succes ")
+        except Exception as e:
+            messages.warning(request,f"une erreur est ce produit : {str(e)}") 
+    charge=Chargesaffaire.objects.all()       
     return render(request,'inventaire/addreservation.html',{'charge':charge})
-
+def editReservation(request , ref):
+    reservation=Reservation.objects.get(refReservation=ref)
+    detail=DetilsReservation.objects.filter(refReservation=ref)
+    if request.method=='POST':
+        req=request.POST
+        print(req.get('chargerAffaire'))
+        print(reservation.client)
+        try:
+            
+            reservation.chargerAffaire=req.get('chargerAffaire')
+            reservation.dateReservation=req.get('dateReservation')
+            reservation.client=req.get('client')
+            reservation.etat='En cours'
+            reservation.created_at=datetime.now()
+            reservation.save()
+          
+            # G=dict(req)
+            # l=len(G.get("designation"))
+   
+            # for i in range(l):
+            #     detail.designation=G.get("designation")[i]
+            #     detail.qte=G.get("qte")[i]
+            #     detail.dateLivraison=G.get("dateLivraison")[i]
+            #     detail.dateRetour=G.get("dateRetour")[i]
+            #     detail.save()
+            messages.success(request,f"Vous avez Modifier {ref} avec succes ")
+        except ValueError :
+            messages.warning(request,f"une erreur est ce produit : ") 
+    return render(request,'inventaire/editReservation.html',{
+        'title': f'Modification de {ref}',
+        'reservation': reservation,
+        'charge':Chargesaffaire.objects.all(),
+        'detail':detail,
+    })
 def reservations(request):
     
     data=Reservation.objects.all()
@@ -83,7 +104,8 @@ def reservations(request):
     
     return render(request,'inventaire/reservations.html',{
         'title':'Reservations',
-        'data':data
+        'data':data,
+        
     })
 def deleteReservation(request, ref):
     r=Reservation.objects.get(refReservation=ref)

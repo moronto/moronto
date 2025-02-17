@@ -2,58 +2,70 @@
 
 {% block content %}
 <div class="row">
-<h1 class="col-md-3">Reservation</h1>
+<h1 class="col-md-6">Modification de : <span class="text-danger">{{reservation.refReservation}}</span> </h1>
+{% if messages %}
 
+    {% for msg in messages%}
+        <div class="alert alert-{{msg.tags}} p-2 m-0 messages">{{msg}}</div>
+    {% endfor%}
+
+{% endif %}
 </div>
 <div class="formReservation ">
     <form  id='reservationForm' method="post">
         {% csrf_token %}
         <div class="row borderShadaw ">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="dateReservation">Date de reservation</label>
-            <input type="date" id="dateReservation" name="dateReservation" required class="form-control ">
+            <input type="date" id="dateReservation" name="dateReservation" required class="form-control " value="{{reservation.dateReservation|date:'Y-m-d'}}">
             </div>
-         
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="chargerAffaire">Chargee d'affaire</label>
                
                 {% comment %} <input type="text" id="" name="" required class="form-control "> {% endcomment %}
-                <select class="form-select" name="chargerAffaire" id="chargerAffaire">
+                <select class="form-select" name="chargerAffaire" id="chargerAffaire" >
                     {% for ch in charge %}
-                    <option value="{{ch}}">{{ch.name}}</option>
+                    <option value="{{ch}}" {% if ch.name == reservation.chargerAffaire %} selected{% endif%}>{{ch.name}}</option>
                     {% endfor %}
                 </select>
            
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="client">Client</label>
-                <input type="text" id="client" name="client" required class="form-control ">
+                <input type="text" id="client" name="client" required class="form-control " value="{{reservation.client}}">
+            </div>
+            <div class="col-md-3 encour align-content-center">
+                <div class="form-check">
+                <label for="encour">Etat</label>
+                <input type="checkbox" id="encour" value="En cours"  required class="form-check-input" >
+                </div>
             </div>
         </div>
         <div  class="row ">
             <h4 class="mt-2">Details de Reservation : 
             </h4>
-            
             <div id="detailReservation" class=" p-2 ">
+                {% for d in detail %}
                 <div id="first" class="row">
                     <div class="col-md-3">
                         <label for="designation">Designation</label>
-                        <input type="text" id="designation" name="designation" class="form-control ">
+                        <input type="text" id="designation" name="designation" class="form-control " value="{{d.designation}}">
                     </div>
                     <div class="col-md-3">
                         <label for="qte">Quantité</label>
-                        <input type="text" id="qte" name="qte" class="form-control ">
+                        <input type="text" id="qte" name="qte" class="form-control" value="{{d.qte}}">
                     </div>
                     <div class="col-md-3">
                         <label for="dateLivraison">Date de Livraison</label>
-                        <input type="date"  id="dateLivraison" name="dateLivraison" onchange="checkdate()" class="form-control ">
+                        <input type="date"  id="dateLivraison" name="dateLivraison" onchange="checkdate()" class="form-control" value="{{d.dateLivraison|date:'Y-m-d'}}">
                     </div>
                     <div class="col-md-3">
                         <label for="dateRetour">Date de Retour</label>
-                        <input type="date" id="dateRetour" name="dateRetour" onchange="checkdate()" class="form-control ">
+                        <input type="date" id="dateRetour" name="dateRetour" onchange="checkdate()" class="form-control" value="{{d.dateRetour|date:'Y-m-d'}}">
                     </div>
                 </div>
                 
+                {% endfor %}
             </div>
             
             
@@ -70,3 +82,4 @@
 </div>   
 
 {% endblock content %} 
+

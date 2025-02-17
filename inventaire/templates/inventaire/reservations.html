@@ -3,7 +3,12 @@
 {% block content %}
 
 <div class=" borderShadaw p-2 bg-light mr-5 mt-5">
-    
+    <div class="row m-3">
+        <div class="col-md-3"><label for="search">La valeur a rechercher :</label></div>
+        <div class="col-md-9"> <input name="search" type="text" class="form-control"></div>
+        
+       
+    </div>
     <table class="table table-striped">
         <thead class="table-dark text-center fs-4 fs-bold ">
             <tr>
@@ -28,7 +33,7 @@
                         <a class="col-md-4" href="{% url 'detailReservation' dt.refReservation %}">
                             <i class="fa fa-file  fa-2x text-success "></i>
                         </a>
-                        <a class="col-md-4" href='#'>
+                        <a class="col-md-4" href="{% url 'editReservation' dt.refReservation %}">
                             <i class='fa fa-edit  fa-2x  text-warning '></i>
                         </a>    
                         <a class="col-md-4" href="{% url 'deleteReservation' dt.refReservation %}">
