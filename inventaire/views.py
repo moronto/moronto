@@ -15,26 +15,18 @@ def addreservation(request):
     if request.method=='POST':
         
         req=request.POST
-
-        currentYear=datetime.now().strftime("%Y").strip()
-        global reservation
         
-        reservation=Reservation.objects.all()
-        print(reservation)
+        currentYear=datetime.now().strftime("%Y").strip()
         refs=[]
-        for r in reservation:
-            print(type(r))
-        print(refs)    
-        if Reservation.objects.count()==0 or reservation['refReservation'][-4:]!=currentYear:
-            refReservation = f'1-{currentYear}'
+        reservation=Reservation.objects.all()
+        if reservation.count() != 0:
+            print('hayi',reservation.count)
+            for r in reservation:
+                refs.append(int(r.refReservation.split('-')[0]))
+            refReservation=f'{max(refs)+1}-{currentYear}'
+        else:    
+            refReservation=f'1-{currentYear}'
 
-            print("ahya kighan dghi",refReservation)
-        else:
-            i=reservation['refReservation'].find('-')
-            num=int(reservation['refReservation'][:i])
-
-            refReservation=f'{num+1}-{currentYear}'
-            print("anuk nit",refReservation)
 
         try:
             r=Reservation(refReservation=refReservation,
@@ -67,8 +59,7 @@ def editReservation(request , ref):
     detail=DetilsReservation.objects.filter(refReservation=ref)
     if request.method=='POST':
         req=request.POST
-        print(req.get('chargerAffaire'))
-        print(reservation.client)
+      
         try:
             
             reservation.chargerAffaire=req.get('chargerAffaire')
@@ -77,19 +68,25 @@ def editReservation(request , ref):
             reservation.etat='En cours'
             reservation.created_at=datetime.now()
             reservation.save()
+
+            DetilsReservation.objects.filter(refReservation=ref).delete()
+            G=dict(req)
+            l=len(G.get("designation"))
+            print(reservation.refReservation,type(reservation))
+            for i in range(l):
+                detil=DetilsReservation(refReservation=reservation,
+                                         designation=G.get("designation")[i],
+                                         qte=G.get("qte")[i],
+                                         dateLivraison=G.get("dateLivraison")[i],
+                                         dateRetour=G.get("dateRetour")[i])
+                detil.save()
+            messages.success(request,f'Vous avez modifier information de reservation : {ref}') 
+            redirect('reservations')   
           
-            # G=dict(req)
-            # l=len(G.get("designation"))
-   
-            # for i in range(l):
-            #     detail.designation=G.get("designation")[i]
-            #     detail.qte=G.get("qte")[i]
-            #     detail.dateLivraison=G.get("dateLivraison")[i]
-            #     detail.dateRetour=G.get("dateRetour")[i]
-            #     detail.save()
-            messages.success(request,f"Vous avez Modifier {ref} avec succes ")
-        except ValueError :
-            messages.warning(request,f"une erreur est ce produit : ") 
+         
+          
+        except  Exception as e :
+            messages.warning(request,f"une erreur est ce produit : {e}") 
     return render(request,'inventaire/editReservation.html',{
         'title': f'Modification de {ref}',
         'reservation': reservation,

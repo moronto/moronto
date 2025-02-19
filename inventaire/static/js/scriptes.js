@@ -76,9 +76,9 @@ $(document).ready(function(){
     },1000).delay(4000)
    
     $(".messages").animate({
-     left:-1000
+     left:'-10000px'
 
-    },1000).fadeOut(2000)
+    },2000)
 
 
 });

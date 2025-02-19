@@ -56,6 +56,7 @@ body {
     position:absolute;
     top:-100px;
     left:10vw;
+    width: 60%;
     z-index: 1000;
     font-family: 'Times New Roman';
     font-size: large;
