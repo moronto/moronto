@@ -19,6 +19,79 @@ body {
 
 /* start base.html */
 
+/* start navbar*/
+.navbar {
+    background: #F5FFFA;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    color: rgb(17, 16, 16) !important;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.05);
+}
+
+.nav-link {
+    color: rgb(12, 12, 12) !important;
+    position: relative;
+    margin: 0 15px;
+    transition: color 0.3s ease;
+}
+
+/* Effet de soulignement animé */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #6f4caf;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: #0b21e0 !important;
+}
+
+/* Dropdown personnalisé */
+.dropdown-menu {
+    background: #333;
+    border: none;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-item {
+    color: white !important;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background: white !important;
+    color: #1a1a1a !important;
+}
+
+/* Menu mobile */
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+
+/* end navbar*/
+
+
+
+
+
 .logo img{
     width: 200px;
     height: 100px;
@@ -26,12 +99,15 @@ body {
 }
 .action a{
     margin-left: 30px;
+    margin-top:10px;
+    text-decoration: none;
 }
 .frm{
     border:3px solid black;
     box-shadow: 4px 6px 4px 2px rgb(19, 18, 18,0.7);
     background-color: rgb(142, 158, 158);
 }
+
 
 
 /* end base.html stock */
@@ -41,28 +117,19 @@ body {
     color:black;
     font-size: medium;
     transition: .4s;
-    border-bottom: 2px solid #EEE;
-}
-.body .row:nth-child(odd){
+    border-bottom: 2px solid #F8F8FF;
+    border-bottom: 1px solid #A9A9A9;
     
-    background-color: #999;
     
-}
-.body .row:nth-child(even){
-    
-    background-color: #ccc;
-   
 }
 
 
 
-.body a{
-    color:rgb(239, 237, 243);
-    font-size: medium;
-}
+
+
 
 .body .row:hover{
-    background-color: #cccc;
+    background:linear-gradient(#A9A9A9,#F5FFFA,#A9A9A9)
 }
 
 
@@ -92,7 +159,6 @@ body {
     
 }
 .borderShadaw{
-    height: calc(100vh - 86px);
     border-radius: 8px;
     border: 1px solid black;
     box-shadow: 4px 6px 4px 2px rgb(19, 18, 18,0.7);
@@ -103,8 +169,9 @@ body {
 
 /* scrolling table*/
 .table-container {
-    max-height: 600px;
-    overflow: auto;
+    max-height: 80vh;
+    width: 100%;
+    overflow-y: auto;
     position: relative;
 }
 

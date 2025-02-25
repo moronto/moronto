@@ -1,5 +1,18 @@
 
 'use strict';
+//start navbar
+ // Ajout d'un effet de réduction au scroll
+ window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if(window.scrollY > 50) {
+        navbar.style.padding = '0.5rem 0';
+        navbar.style.background = '#0a0a0a';
+    } else {
+        navbar.style.padding = '1rem 0';
+        navbar.style.background = '#1a1a1a';
+    }
+});
+//end navbar
 
 
 function addLigne(){
@@ -94,27 +107,25 @@ $(document).ready(function(){
                 response.data.forEach(function(reservation) {
 
                     const row=`
-                    <div class="row">
+            <div class="row">
                 <div class="col-md-2">${reservation.dateReservation}</div>
                 <div class="col-md-2">${reservation.refReservation}</div>
                 <div class="col-md-2">${reservation.chargerAffaire}</div>
                 <div class="col-md-2">${reservation.client}</div>
                 <div class="col-md-2">${reservation.etat}</div>
-                <div class="col-md-2">
-                    <div class="row justify-content-between">
-                        <a class="col-md-4" href="${reservation.urlDetails}">
+                <div class="col-md-2 action">
+                    
+                        <a  href="${reservation.urlDetails}">
                             <i class="fa fa-file  fa-2x text-success "></i>
                         </a>
-                        <a class="col-md-4" href="${reservation.urlEdit}">
+                        <a  href="${reservation.urlEdit}">
                             <i class='fa fa-edit  fa-2x  text-warning '></i>
                         </a>    
-                        <a class="col-md-4" href="${reservation.urlDelete}">
+                        <a  href="${reservation.urlDelete}">
                             <i class='fa fa-trash fa-2x  text-danger '></i>
                         </a>
-                    </div>
-                    
                 </div>
-             </div>   
+            </div>   
                     
                     `
                     bodyTable.append(row)

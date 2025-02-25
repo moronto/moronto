@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
-{% block content%}
+{% block content %}
+<div class="p-4 bg-light mt-1 borderShadaw">
 <h1 class="text-center">
     INVENTAIRE GENERAL
 </h1>
 
-<div class="row bg-black pt-2 pb-2 text-white ">
+<div class="row bg-black pt-2 pb-2 text-white  ">
     <div class="col-md-1 ">Réference</div>
     <div class="col-md-4 ">Designation</div>
     <div class="col-md-1 ">Situation</div>
@@ -15,8 +16,8 @@
 </div>
 <div class="body">
 
-    {% for mat in materiel%}
-    <div class="row  pt-2 pb-2 ">
+    {% for mat in materiel %}
+    <div class="row  ">
         <div class="col-md-1 ">{{mat.refMateriel}}</div>
         <div class="col-md-4 ">{{mat.designation}}</div>
         <div class="col-md-1 ">{{mat.situation}}</div>
@@ -29,6 +30,7 @@
         </div>    
     </div> 
     {% endfor%}
+</div>
 </div>
 
 {% endblock content%}
