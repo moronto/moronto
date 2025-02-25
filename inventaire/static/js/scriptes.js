@@ -82,7 +82,7 @@ $(document).ready(function(){
 
     $('#search').on('input',function(){
         var valSearch=$(this).val()
-
+        fetch(`/search/?valSearch=${encodeURIComponent(valSearch)}`).then(data=> console.log(data))
         $.ajax({
             url:'/search/',
             method: 'GET',
@@ -94,13 +94,13 @@ $(document).ready(function(){
                 response.data.forEach(function(reservation) {
 
                     const row=`
-                    <tr>
-                <td>${reservation.dateReservation}</td>
-                <td>${reservation.refReservation}</td>
-                <td>${reservation.chargerAffaire}</td>
-                <td>${reservation.client}</td>
-                <td>${reservation.etat}</td>
-                <td>
+                    <div class="row">
+                <div class="col-md-2">${reservation.dateReservation}</div>
+                <div class="col-md-2">${reservation.refReservation}</div>
+                <div class="col-md-2">${reservation.chargerAffaire}</div>
+                <div class="col-md-2">${reservation.client}</div>
+                <div class="col-md-2">${reservation.etat}</div>
+                <div class="col-md-2">
                     <div class="row justify-content-between">
                         <a class="col-md-4" href="${reservation.urlDetails}">
                             <i class="fa fa-file  fa-2x text-success "></i>
@@ -113,8 +113,8 @@ $(document).ready(function(){
                         </a>
                     </div>
                     
-                </td>
-             </tr>   
+                </div>
+             </div>   
                     
                     `
                     bodyTable.append(row)

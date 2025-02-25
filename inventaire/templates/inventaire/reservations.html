@@ -2,60 +2,74 @@
 
 {% block content %}
 
-<div class=" borderShadaw p-2 bg-light mr-5 mt-5">
+<style>
+    /* Ajoutez ce CSS */
+   
+</style>
+
+<div class="  borderShadaw p-2 bg-light mt-1">
     <div class="row m-3">
-        <p class="dd"></p>
         <div class="col-md-3"><label for="search">La valeur a rechercher :</label></div>
         <div class="col-md-9"> <input id="search" type="text" class="form-control"></div>
-        
-       
     </div>
-    <table   class="table table-striped">
-        <thead class="table-dark  fs-4 fs-bold ">
-            <tr>
-                <td>date reservation</td>
-                <td>Reference</td>
-                <td>Charge d'affaire</td>
-                <td>Client</td>
-                <td>Etat</td>
-                <td class='text-center'>Action</td>
-            </tr>
-        </thead>
-        <tbody id='table-body'>
-            {% for dt in data %}
-             <tr>
-                <td>{{dt.dateReservation|date:'d/m/Y'}}</td>
-                <td>{{dt.refReservation}}</td>
-                <td>{{dt.chargerAffaire}}</td>
-                <td>{{dt.client}}</td>
-                <td>{{dt.etat}}</td>
-                <td>
-                    <div class="row justify-content-between">
-                        <a class="col-md-4" href="{% url 'detailReservation' dt.refReservation %}">
-                            <i class="fa fa-file  fa-2x text-success "></i>
-                        </a>
-                        <a class="col-md-4" href="{% url 'editReservation' dt.refReservation %}">
-                            <i class='fa fa-edit  fa-2x  text-warning '></i>
-                        </a>    
-                        <a class="col-md-4" href="{% url 'deleteReservation' dt.refReservation %}">
-                            <i class='fa fa-trash fa-2x  text-danger '></i>
-                        </a>
-                    </div>
-                    
-                </td>
-             </tr>   
-            {% endfor %}
-        </tbody>
-
-
-    </table>
     
+    <div>
+        <div class="row bg-black pt-2 pb-2 text-white">
+            <div class="col-md-2">Date reservation</div>
+            <div class="col-md-2">Reference</div>
+            <div class="col-md-2">Charge d'affaire</div>
+            <div class="col-md-2">Client</div>
+            <div class="col-md-2">Etat</div>
+            <div class="col-md-2">Action</div>
+        </div>
+        <div class=" body table-container"  id='table-body'>
+            {% for dt in data %}
+                <div class="row">
+                    <div class="col-md-2">{{dt.dateReservation|date:'d/m/Y'}}</div>
+                    <div class="col-md-2">{{dt.refReservation}}</div>
+                    <div class="col-md-2">{{dt.chargerAffaire}}</div>
+                    <div class="col-md-2">{{dt.client}}</div>
+                    <div class="col-md-2">{{dt.etat}}</div>
+                    <div class="col-md-2 action ">
+                        
+                            <a class="col-md-4" href="{% url 'detailReservation' dt.refReservation %}">
+                                <i class="fa fa-file fa-2x text-success"></i>
+                            </a>  
+                            <a class="col-md-4" href="{% url 'editReservation' dt.refReservation %}">
+                                <i class='fa fa-edit fa-2x text-warning'></i>
+                            </a>    
+                            <a class="col-md-4" href="{% url 'deleteReservation' dt.refReservation %}">
+                                <i class='fa fa-trash fa-2x text-danger'></i>
+                            </a>
+                        
+                    </div>
+                </div>   
+                {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    
+    <!-- Ajoutez un conteneur autour du tableau -->
+    <div class=" table-container"  >
+        <table class="table table-striped">
+            <thead class="table-dark fs-4 fs-bold">
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th class='text-center'></th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+    </div>
 </div>
-
-        
-
-
-
-
 
 {% endblock content %}

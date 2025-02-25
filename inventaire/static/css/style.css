@@ -10,11 +10,12 @@
 }
 
 body {
-    height: 100vh;
+    
     background:#BBB
        
 
 }
+
 
 /* start base.html */
 
@@ -35,23 +36,36 @@ body {
 
 /* end base.html stock */
 
-.body .row {
-    color:rgb(247, 244, 244);
+
+.body .row{
+    color:black;
     font-size: medium;
     transition: .4s;
-    background-color: black;
-    opacity: .8;
     border-bottom: 2px solid #EEE;
 }
+.body .row:nth-child(odd){
+    
+    background-color: #999;
+    
+}
+.body .row:nth-child(even){
+    
+    background-color: #ccc;
+   
+}
+
+
+
 .body a{
     color:rgb(239, 237, 243);
     font-size: medium;
 }
-.encour  input[type="checkbox"] {
-    transform: scale(2.5);}
+
 .body .row:hover{
-    background-color: #333;
+    background-color: #cccc;
 }
+
+
 .messages{
     position:absolute;
     top:-100px;
@@ -61,10 +75,10 @@ body {
     font-family: 'Times New Roman';
     font-size: large;
     font-weight: 900;
-    color:rgb(8, 8, 252);
+    color:black;
     padding: 20px;
-    border-radius: 20px;
-    box-shadow: 2px 2px 8px  rgb(243, 243, 243);
+    border-radius: 5px;
+   
     
 }
 /* end stle stock */
@@ -78,15 +92,36 @@ body {
     
 }
 .borderShadaw{
-    
+    height: calc(100vh - 86px);
     border-radius: 8px;
     border: 1px solid black;
     box-shadow: 4px 6px 4px 2px rgb(19, 18, 18,0.7);
     padding:15px 0;
+    
 
 }
 
+/* scrolling table*/
+.table-container {
+    max-height: 600px;
+    overflow: auto;
+    position: relative;
+}
+
+thead {
+    position: sticky;
+    top: 0px;
+    background-color: white;
+    z-index: 2;
+}
+
+table {
+    table-layout: fixed;
+    width: 90%;
+}
+
+
+
+
 /* end reservation.html */
-
-
 

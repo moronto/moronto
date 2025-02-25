@@ -129,14 +129,13 @@ def searchReservation(request):
     if request.method=='GET':
        if request.GET.get('valSearch')=='':
             data=Reservation.objects.all()
+            print(data.refReservation)
        else:    
           data=Reservation.objects.filter(Q(refReservation__icontains=request.GET.get('valSearch'))|
                                           Q(dateReservation__icontains=request.GET.get('valSearch'))|
                                           Q(chargerAffaire__icontains=request.GET.get('valSearch'))|
                                           Q(client__icontains=request.GET.get('valSearch'))|
                                           Q(etat__icontains=request.GET.get('valSearch'))
-                                        
-                                          
                                           )
           
 
