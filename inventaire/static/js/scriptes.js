@@ -78,9 +78,61 @@ $(document).ready(function(){
     $(".messages").animate({
      left:'-10000px'
 
-    },2000)
+    },2000) 
 
+    $('#search').on('input',function(){
+        var valSearch=$(this).val()
+
+        $.ajax({
+            url:'/search/',
+            method: 'GET',
+            caches:false,
+            data: {'valSearch':valSearch},
+            success: function(response) {
+                const bodyTable=$('#table-body');
+                bodyTable.empty();
+                response.data.forEach(function(reservation) {
+
+                    const row=`
+                    <tr>
+                <td>${reservation.dateReservation}</td>
+                <td>${reservation.refReservation}</td>
+                <td>${reservation.chargerAffaire}</td>
+                <td>${reservation.client}</td>
+                <td>${reservation.etat}</td>
+                <td>
+                    <div class="row justify-content-between">
+                        <a class="col-md-4" href="${reservation.urlDetails}">
+                            <i class="fa fa-file  fa-2x text-success "></i>
+                        </a>
+                        <a class="col-md-4" href="${reservation.urlEdit}">
+                            <i class='fa fa-edit  fa-2x  text-warning '></i>
+                        </a>    
+                        <a class="col-md-4" href="${reservation.urlDelete}">
+                            <i class='fa fa-trash fa-2x  text-danger '></i>
+                        </a>
+                    </div>
+                    
+                </td>
+             </tr>   
+                    
+                    `
+                    bodyTable.append(row)
+                    
+                });
+                 
+            }, 
+        
+
+        });
+   
+   
+    });
+
+
+   
 
 });
 
 
+// hona

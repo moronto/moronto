@@ -70,6 +70,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'gestionstock.wsgi.application'
 
+LOGIN_URL = '/accounts/login/'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases

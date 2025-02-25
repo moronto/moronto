@@ -34,11 +34,14 @@
                 <label for="client">Client</label>
                 <input type="text" id="client" name="client" required class="form-control " value="{{reservation.client}}">
             </div>
-            <div class="col-md-3 encour align-content-center">
-                <div class="form-check">
-                <label for="encour">Etat</label>
-                <input type="checkbox" id="encour" value="En cours"  required class="form-check-input" >
-                </div>
+            <div class="col-md-3">
+                
+                <label for="etat">Etat</label>
+                <select id="etat" name='etat' class='form-control'>
+                    <option value='En cours'>En Cours</option>
+                    <option value='effectuer'>effectuer</option>
+                </select>
+                
             </div>
         </div>
         <div  class="row ">

@@ -1,8 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 <h1 class="text-center m-2 text-danger">Ajouter un Element</h1>
-<div class="messages">
 
-</div>
 <form method="post">
   {% csrf_token %}
   <div class="m-auto   p-4 w-75 borderShadaw">
@@ -28,22 +26,7 @@
         />
       </div>
     </div>
-    <div class="row mt-2">
-      <div class="col-md-4 fs-4 text-dark">Situation</div>
-
-      <div class="col-md-8">
-        <select name="situation" class=" form-select" id="situation" onchange="">
-          <option selected>Selectioner...</option>
-          <option value="DISPONIBLE">DISPONIBLE</option>
-          <option value="LOUER">LOUER</option>
-          <option value="VENTE">VENTE</option>
-          <option value="A VERIFIER">A VERIFIER</option>
-          <option value="UTILISER">UTILISER</option>
-          <option value="DETERIORER">DETERIORER</option>
-          <option value="DON">DON</option>
-        </select>
-      </div>
-    </div>
+    
     <div class="row mt-2">
       <div class="col-md-4 fs-4 text-dark">Emplacement</div>
 

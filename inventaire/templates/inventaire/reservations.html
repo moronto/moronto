@@ -4,23 +4,24 @@
 
 <div class=" borderShadaw p-2 bg-light mr-5 mt-5">
     <div class="row m-3">
+        <p class="dd"></p>
         <div class="col-md-3"><label for="search">La valeur a rechercher :</label></div>
-        <div class="col-md-9"> <input name="search" type="text" class="form-control"></div>
+        <div class="col-md-9"> <input id="search" type="text" class="form-control"></div>
         
        
     </div>
-    <table class="table table-striped">
-        <thead class="table-dark text-center fs-4 fs-bold ">
+    <table   class="table table-striped">
+        <thead class="table-dark  fs-4 fs-bold ">
             <tr>
                 <td>date reservation</td>
                 <td>Reference</td>
                 <td>Charge d'affaire</td>
                 <td>Client</td>
                 <td>Etat</td>
-                <td>Action</td>
+                <td class='text-center'>Action</td>
             </tr>
         </thead>
-        <tbody>
+        <tbody id='table-body'>
             {% for dt in data %}
              <tr>
                 <td>{{dt.dateReservation|date:'d/m/Y'}}</td>
