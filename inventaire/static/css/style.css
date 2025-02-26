@@ -20,71 +20,12 @@ body {
 /* start base.html */
 
 /* start navbar*/
-.navbar {
-    background: #F5FFFA;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+.profile-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
 }
-
-.navbar-brand {
-    color: rgb(17, 16, 16) !important;
-    font-size: 1.5rem;
-    transition: transform 0.3s ease;
-}
-
-.navbar-brand:hover {
-    transform: scale(1.05);
-}
-
-.nav-link {
-    color: rgb(12, 12, 12) !important;
-    position: relative;
-    margin: 0 15px;
-    transition: color 0.3s ease;
-}
-
-/* Effet de soulignement animé */
-.nav-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #6f4caf;
-    transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-    width: 100%;
-}
-
-.nav-link:hover {
-    color: #0b21e0 !important;
-}
-
-/* Dropdown personnalisé */
-.dropdown-menu {
-    background: #333;
-    border: none;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.dropdown-item {
-    color: white !important;
-    transition: all 0.3s ease;
-}
-
-.dropdown-item:hover {
-    background: white !important;
-    color: #1a1a1a !important;
-}
-
-/* Menu mobile */
-.navbar-toggler {
-    border-color: rgba(255, 255, 255, 0.5);
-}
-
 
 /* end navbar*/
 
@@ -129,7 +70,8 @@ body {
 
 
 .body .row:hover{
-    background:linear-gradient(#A9A9A9,#F5FFFA,#A9A9A9)
+    background:linear-gradient(#A9A9A9,#F5FFFA,#A9A9A9);
+    border-radius: 20px;
 }
 
 
@@ -163,6 +105,7 @@ body {
     border: 1px solid black;
     box-shadow: 4px 6px 4px 2px rgb(19, 18, 18,0.7);
     padding:15px 0;
+    
     
 
 }

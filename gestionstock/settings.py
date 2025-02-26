@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'inventaire.apps.InventaireConfig',
+    'accounts',
+    # 'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -70,7 +72,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'gestionstock.wsgi.application'
 
-LOGIN_URL = '/accounts/login/'
+AUTH_USER_MODEL = 'auth.User'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'login'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases

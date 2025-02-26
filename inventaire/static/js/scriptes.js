@@ -2,16 +2,7 @@
 'use strict';
 //start navbar
  // Ajout d'un effet de réduction au scroll
- window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if(window.scrollY > 50) {
-        navbar.style.padding = '0.5rem 0';
-        navbar.style.background = '#0a0a0a';
-    } else {
-        navbar.style.padding = '1rem 0';
-        navbar.style.background = '#1a1a1a';
-    }
-});
+
 //end navbar
 
 
