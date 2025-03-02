@@ -2,8 +2,11 @@
 
 {% block content %}
 
-
-    <h1>detail reservation</h1>
+    <div class="d-flex">
+        <h1 class="me-auto">detail reservation</h1>
+        <a href="{% url 'reservations' %}" class="btn btn-info" >Retour <i class="fa fa-arrow-left "></i></a>
+    </div>
+    
 
     <table class="table table-striped table-hover">
         <thead class="table-dark">
@@ -26,7 +29,7 @@
                 <td>{{r.dateRetour}}</td> 
                 <td class="col-md-2 action">
                   
-                    <a href="#">
+                    <a href="{% url 'editReservation' r.refReservation %}">
                         <i class="fa fa-edit  fa-2x  text-warning"></i>
                     </a>    
                     <a href="{% url 'deleteDetailReservation' r.id r.refReservation %}">

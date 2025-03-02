@@ -16,21 +16,21 @@
     <div class="h-90">
         <div class="row bg-black pt-2 pb-2 text-white">
             <div class="col-md-2">Date reservation</div>
-            <div class="col-md-2">Reference</div>
+            <div class="col-md-1">Reference</div>
             <div class="col-md-2">Charge d'affaire</div>
             <div class="col-md-2">Client</div>
             <div class="col-md-2">Etat</div>
-            <div class="col-md-2">Action</div>
+            <div class="col-md-3">Action</div>
         </div>
         <div class=" body table-container"  id='table-body'>
             {% for dt in data %}
                 <div class="row">
                     <div class="col-md-2">{{dt.dateReservation|date:'d/m/Y'}}</div>
-                    <div class="col-md-2">{{dt.refReservation}}</div>
+                    <div class="col-md-1">{{dt.refReservation}}</div>
                     <div class="col-md-2">{{dt.chargerAffaire}}</div>
                     <div class="col-md-2">{{dt.client}}</div>
                     <div class="col-md-2">{{dt.etat}}</div>
-                    <div class="col-md-2 action ">
+                    <div class="col-md-3 action ">
                         
                             <a href="{% url 'detailReservation' dt.refReservation %}">
                                 <i class='fa fa-file  fa-2x text-success'></i>

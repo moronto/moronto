@@ -1,0 +1,95 @@
+
+
+{%  extends  'base.html'%}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+<label for="info">Information Livraison</label>
+<div id="info" class="row borderShadaw mb-3">
+    <div class="col-md-3">
+        <label for="client">Client</label>
+        <input type="text" name="client" class="form-control">
+    </div>
+    <div class="col-md-2">
+        <label for="chargerAffaire">Charger D'affaire</label>
+        <input type="text" name="chargerAffaire" class="form-control">
+    </div>
+    <div class="col-md-2">
+        <label for="dateLivraison">Date de Livraison</label>
+        <input type="date" name="dateLivraison" class="form-control">
+    </div>
+    <div class="col-md-2">
+        <label for="type">Type</label>
+        <select name="type" class="form-select">
+            <option value="evenement">Evenement</option>
+            <option value="chantier">Chantier</option>
+            <option value="vente">Vente</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <label for="chantier">Chantier</label>
+        <input type="text" name="chantier" class="form-control">
+    </div>
+    <div id="trans" class="row mt-2">
+        <div class="col-md-3">
+            <label for="typeTrans" >Transport a :</label>
+        <select id="typeTrans" name="typeTrans" class="form-select" onchange="selectTrans()">
+            <option value="notre" selected>---------- </option>
+            <option value="notre">Notre charge</option>
+            <option value="client">La charge de client</option>
+        </select>
+        </div>
+        <div class="col-md-3">
+            <label for="matriculeTrans" class="trans" style="display: none;">Matricule Transport :</label>
+            <input type="text" id="matriculeTrans" name="matriculeTrans" class="form-control trans"  style="display: none;" >
+        </div>
+        <div class="col-md-3">
+            <label for="conducteurTrans" class="trans" style="display: none;">Chauffeur :</label>
+            <input type="text" id="conducteurTrans" name="conducteurTrans" class="form-control trans" style="display: none;" >
+        </div>
+    
+    </div>
+</div>
+
+
+
+<label for="materiel">Materiel a livree</label>
+<div  id="materiel" class=" borderShadaw mat">
+    <div >
+        <div class="row bg-black pt-2 pb-2 text-white  mb-2">
+            <div class="col-md-2 ps-4 fs-4">Référence</div>
+            <div class="col-md-3 ps-4 fs-4">Designation</div>
+            <div class="col-md-2 ps-4 fs-4">Quantité</div>
+            <div class="col-md-5 ps-4 fs-4">Observations</div>
+        </div> 
+    </div>
+        <!-- zonne body -->
+    <div id="body">
+        <div class="row   mb-1">
+                <div class="col-md-2"><input name="refMateriel" type="text" class="form-control"></div>
+                <div class="col-md-3"><input name="designation" type="text" class="form-control"></div>
+                <div class="col-md-2"><input name="qte" type="number" class="form-control"></div>
+                <div class="col-md-5"><input name="observations" type="text" class="form-control"></div>
+        </div>
+    </div>
+    
+</div>
+<!-- zone button de commande -->
+<div class="row borderShadaw">
+    <div class="col-md-4">
+        
+        <input type="submit" value="Ajouter" class="btn btn-success w-90" >
+        
+    </div>
+    <div class="col-md-4">
+        <input type="button" value="Ajouter" class="btn btn-success w-90" onclick="addLigne('#body')">
+    </div>
+    <div class="col-md-4">
+    <input type="button" value="Suprimer" class="btn btn-danger w-90" onclick="deleteLigne('#body')">
+
+    </div>
+    
+</div>
+</form>
+
+{% endblock content %}

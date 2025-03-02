@@ -51,11 +51,21 @@
                 <!-- Dropdown 2 -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        Services
+                        Gestion des Reservations
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'reservations' %}">Reservations</a></li>
                             <li><a class="dropdown-item" href="{% url 'addreservation' %}">Ajouter Reservation</a></li>
+                    </ul>
+                </li>
+                <!-- Dropdown 3 -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        Gestion des Livraisons
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Livraisons</a></li>
+                            <li><a class="dropdown-item" href="{% url 'newLivraison' %}">Ajouter un nouveau</a></li>
                     </ul>
                 </li>
             </ul>

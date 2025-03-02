@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'inventaire.apps.InventaireConfig',
     'accounts',
+    'livraisons',
     # 'crispy_forms',
 ]
 

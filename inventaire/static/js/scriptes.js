@@ -6,16 +6,16 @@
 //end navbar
 
 
-function addLigne(){
+function addLigne(idName){
 
-    let d=document.querySelector("#detailReservation");
+    let d=document.querySelector(idName);
     let mydiv=d.lastElementChild;
     let g=mydiv.cloneNode(true);
     d.appendChild(g)
 }
 
-function deletLigne(){
-    let d=document.querySelector("#detailReservation");
+function deleteLigne(idName){
+    let d=document.querySelector(idName);
     if(d.children.length===1) {
         
  
@@ -137,4 +137,17 @@ $(document).ready(function(){
 });
 
 
-// hona
+// script for app livraison
+
+//start newlivraison
+function selectTrans() {
+    const typetrans = document.querySelector('#typeTrans');
+    const trans = document.querySelectorAll('.trans');
+    const display = typetrans.selectedIndex === 1 ? 'block' : 'none';
+    trans.forEach(element => element.style.display = display);
+}
+
+
+//fetch les donnees 
+
+//End newlivraison

@@ -17,6 +17,8 @@ body {
 }
 
 
+
+
 /* start base.html */
 
 /* start navbar*/
@@ -93,13 +95,7 @@ body {
 /* end stle stock */
 /* start reservation.html */
 
-#detailReservation{
-    min-height:350px;
-    border-radius: 8px;
-    border: 1px solid black;
-    box-shadow: 4px 6px 4px 2px rgb(19, 18, 18,0.7);
-    
-}
+
 .borderShadaw{
     border-radius: 8px;
     border: 1px solid black;
@@ -116,6 +112,7 @@ body {
     width: 100%;
     overflow-y: auto;
     position: relative;
+    
 }
 
 thead {
@@ -135,3 +132,14 @@ table {
 
 /* end reservation.html */
 
+/*start css for app livraison*/
+.mat{
+    min-height: 300px;
+    margin-right: -11px;
+    margin-left: -11px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    padding:15PX;
+}
+
+/*end css for app livraison*/

@@ -1,0 +1,28 @@
+from django.db import models
+from inventaire.models import *
+
+class Livraison(models.Model):
+    bl=models.AutoField(primary_key=True)
+    client=models.CharField(max_length=60)
+    dateLivraison=models.DateField()
+    chargerAffaire=models.CharField(max_length=40)
+    typeLivraison=models.CharField(max_length=30)
+    chantier=models.CharField(max_length=50)
+    typeTrans=models.CharField(max_length=20)
+    matTrans=models.CharField(max_length=40)
+    condTrans=models.CharField(max_length=30)
+    def __str__(self):
+        return str(self.bl)
+    
+class DetailsLivraison(models.Model):
+    bl=models.ForeignKey(Livraison, on_delete=models.CASCADE)
+    refMateriel=models.CharField(max_length=30)
+    designation=models.CharField(max_length=50)
+    qte=models.IntegerField()
+    observations=models.CharField(max_length=200)
+    def __str__(self):
+        return self.refMateriel
+
+
+    
+

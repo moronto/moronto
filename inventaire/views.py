@@ -46,6 +46,7 @@ def addreservation(request):
             r.save()
             refM=Reservation.objects.get(refReservation=refReservation)
             G=dict(req)
+            print(G.get("designation"))
             l=len(G.get("designation"))
    
             for i in range(l):
@@ -58,7 +59,7 @@ def addreservation(request):
             messages.success(request,f"Vous avez ajouter {refM} avec succes ")
             return redirect("reservations")
         except Exception as e:
-            messages.warning(request,f"une erreur est ce produit : {str(e)}") 
+            messages.warning(request,f"une erreur est ce produit : {e}") 
     charge=Chargesaffaire.objects.all()       
     return render(request,'inventaire/addreservation.html',{'charge':charge})
 @login_required

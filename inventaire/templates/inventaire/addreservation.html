@@ -34,25 +34,31 @@
             <h4 class="mt-2">Details de Reservation : 
             </h4>
             
-            <div id="detailReservation" class=" p-2 ">
-                <div id="first" class="row">
+            <div  class="borderShadaw p-2 ">
+                <div class="row bg-black pt-2 pb-2 text-white  mb-2">
+                    <div class="col-md-3">Designation</div>
+                    <div class="col-md-3">Quantité</div>
+                    <div class="col-md-3">Date de Livraison</div>
+                    <div class="col-md-3">Date de Retour</div>
+                </div>
+               <div id="detailReservation">
+                <div class="row">
                     <div class="col-md-3">
-                        <label for="designation">Designation</label>
                         <input type="text" id="designation" name="designation" class="form-control ">
                     </div>
                     <div class="col-md-3">
-                        <label for="qte">Quantité</label>
                         <input type="text" id="qte" name="qte" class="form-control ">
                     </div>
                     <div class="col-md-3">
-                        <label for="dateLivraison">Date de Livraison</label>
                         <input type="date"  id="dateLivraison" name="dateLivraison" onchange="checkdate()" class="form-control ">
                     </div>
                     <div class="col-md-3">
-                        <label for="dateRetour">Date de Retour</label>
                         <input type="date" id="dateRetour" name="dateRetour" onchange="checkdate()" class="form-control ">
                     </div>
                 </div>
+
+               </div>
+
                 
             </div>
             
@@ -60,8 +66,8 @@
         </div>
         <div class="row mt-3  justify-content-around p-2 borderShadaw">
             <input type="submit" class="btn btn-success w-25" value="Enregistrer">
-            <input type="button" class="btn btn-success  w-25" onclick="addLigne()" value="Ajouter un Ligne">
-            <input type="button" class="btn btn-danger   w-25" onclick="deletLigne()" value="Suprimer un ligne">
+            <input type="button" class="btn btn-success  w-25" onclick="addLigne('#detailReservation')" value="Ajouter un Ligne">
+            <input type="button" class="btn btn-danger   w-25" onclick="deleteLigne('#detailReservation')" value="Suprimer un ligne">
         </div>
         
         
