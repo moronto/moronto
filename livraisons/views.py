@@ -1,28 +1,69 @@
 from django.shortcuts import render
 from .models import *
+from inventaire.models import *
+from datetime import timezone,datetime
+from django.contrib import messages
+from django.http import JsonResponse
 
 def newLivraison(request):
     if request.method=='POST':
         req=request.POST
+        print(request.POST.get("matTrans"))
+
+
+        currentYear=datetime.now().strftime("%Y").strip()
+        bls=[]
+        livraison=Livraison.objects.all()
+        if livraison.count() != 0:
+            for r in livraison:
+                bls.append(int(r.bl.split('-')[0]))
+            bl=f'{str((max(bls)+1)).zfill(4)}-{currentYear}'
+        else:    
+            bl=f'0001-{currentYear}'
+
         bl=Livraison(
-            
+            bl=bl,
             client=request.POST.get("client"),
-            dateLivraison='2025-02-02',#request.POST.get("dateLivraison"),
-            refMateriel=request.POST.getlist("refMateriel"),
-            designation=request.POST.getlist("designation"),
-            qte=request.POST.getlist("qte"),
-            observations=request.POST.getlist("observation"),
+            dateLivraison=request.POST.get("dateLivraison"),
             chargerAffaire=request.POST.get("chargerAffaire"),
             typeLivraison=request.POST.get("typeLivraison"),
             chantier=request.POST.get("chantier"),
-            typeTrans=request.POST.get("typeTans"),
-            matTrans=request.POST.get("matTans"),
+            typeTrans=request.POST.get("typeTrans"),
+            matTrans=request.POST.get("matTrans"),
             condTrans=request.POST.get("condTrans"),
-
         )
         bl.save()
-           
+        
+
+        for i in range(len(req.getlist("refMateriel"))):
+            detail=DetailsLivraison(
+                bl=bl,
+                refMateriel=req.getlist('refMateriel')[i],
+                designation=req.getlist('designation')[i],
+                qte=int(req.getlist('qte')[i]),
+                observations=req.getlist('observations')[i],
+            )
+            detail.save()
+        messages.success(request,f'Vous avez ajouter BL N° {bl} avec succes')
+        
     
+        print("fff",Chargesaffaire.objects.all())
+
+    return render(request,'livraisons/newLivraison.html',{
+        'title':'Ajouter nouveau',
+        'charger':Chargesaffaire.objects.all(),
+        'client':['SOGEA','NGE','TGCC','AVANT SCENE','ACWA POWER','SENER']
+    })
 
 
-    return render(request,'livraisons/newLivraison.html')
+def designation(request):
+    ref=request.GET.get('valSearch')
+    data=Stock.objects.filter(refMateriel=ref).values('designation')
+    if len(data)==0:
+        d={'data':""}
+    else:
+        d=data[0]    
+
+    return JsonResponse({'data':d})
+
+

@@ -8,19 +8,27 @@
 <div id="info" class="row borderShadaw mb-3">
     <div class="col-md-3">
         <label for="client">Client</label>
-        <input type="text" name="client" class="form-control">
+        <select name="client" class="form-select">
+            {% for c in client %}
+            <option value="{{c}}">{{c}}</option>
+            {% endfor %}
+        </select>
     </div>
     <div class="col-md-2">
-        <label for="chargerAffaire">Charger D'affaire</label>
-        <input type="text" name="chargerAffaire" class="form-control">
+        <label for="">Charger D'affaire</label>
+        <select name="chargerAffaire" class="form-select">
+            {% for ch in charger %}
+            <option value="{{ch}}">{{ch}}</option>
+            {% endfor %}
+        </select>
     </div>
     <div class="col-md-2">
         <label for="dateLivraison">Date de Livraison</label>
         <input type="date" name="dateLivraison" class="form-control">
     </div>
     <div class="col-md-2">
-        <label for="type">Type</label>
-        <select name="type" class="form-select">
+        <label for="typeLivraison">Type</label>
+        <select name="typeLivraison" class="form-select">
             <option value="evenement">Evenement</option>
             <option value="chantier">Chantier</option>
             <option value="vente">Vente</option>
@@ -40,12 +48,12 @@
         </select>
         </div>
         <div class="col-md-3">
-            <label for="matriculeTrans" class="trans" style="display: none;">Matricule Transport :</label>
-            <input type="text" id="matriculeTrans" name="matriculeTrans" class="form-control trans"  style="display: none;" >
+            <label for="matTrans" class="trans" style="display: none;">Matricule Transport :</label>
+            <input type="text" id="matTrans" name="matTrans" class="form-control trans"  style="display: none;" >
         </div>
         <div class="col-md-3">
-            <label for="conducteurTrans" class="trans" style="display: none;">Chauffeur :</label>
-            <input type="text" id="conducteurTrans" name="conducteurTrans" class="form-control trans" style="display: none;" >
+            <label for="condTrans" class="trans" style="display: none;">Chauffeur :</label>
+            <input type="text" id="condTrans" name="condTrans" class="form-control trans" style="display: none;" >
         </div>
     
     </div>
@@ -66,8 +74,8 @@
         <!-- zonne body -->
     <div id="body">
         <div class="row   mb-1">
-                <div class="col-md-2"><input name="refMateriel" type="text" class="form-control"></div>
-                <div class="col-md-3"><input name="designation" type="text" class="form-control"></div>
+                <div class="col-md-2"><input name="refMateriel" id="refMateriel" type="text" class="form-control"></div>
+                <div class="col-md-3"><input name="designation" id="designation" type="text" class="form-control"></div>
                 <div class="col-md-2"><input name="qte" type="number" class="form-control"></div>
                 <div class="col-md-5"><input name="observations" type="text" class="form-control"></div>
         </div>

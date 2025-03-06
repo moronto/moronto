@@ -131,7 +131,27 @@ $(document).ready(function(){
    
     });
 
+    $('#refMateriel').on('change',function(){
+        var valSearch=$(this).val()
+        $.ajax({
+            url:'/designation/',
+            method: 'GET',
+            caches:false,
+            data: {'valSearch':valSearch},
+            success: function(response) {
+                const designation=$('#designation');
+            
+                // designation.value=response.data
+                console.log(response.data.designation)
+                designation.val(response.data.designation)
+                 
+            }, 
+        
 
+        });
+   
+   
+    });
    
 
 });
