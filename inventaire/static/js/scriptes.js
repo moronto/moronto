@@ -11,6 +11,8 @@ function addLigne(idName){
     let d=document.querySelector(idName);
     let mydiv=d.lastElementChild;
     let g=mydiv.cloneNode(true);
+    g.querySelectorAll('input').forEach(input => {
+        input.value = '';})
     d.appendChild(g)
 }
 
@@ -140,11 +142,13 @@ $(document).ready(function(){
             data: {'valSearch':valSearch},
             success: function(response) {
                 const designation=$('#designation');
-            
-                // designation.value=response.data
-                console.log(response.data.designation)
-                designation.val(response.data.designation)
-                 
+                const alertAddRef=document.querySelector('.alertAddRef');
+                if(response.data.designation===""){
+                    alertAddRef.style.display='block';
+                }
+                else{
+                    designation.val(response.data.designation)
+                } 
             }, 
         
 
@@ -163,11 +167,13 @@ $(document).ready(function(){
 function selectTrans() {
     const typetrans = document.querySelector('#typeTrans');
     const trans = document.querySelectorAll('.trans');
-    const display = typetrans.selectedIndex === 1 ? 'block' : 'none';
+    const display = typetrans.selectedIndex === 0 ? 'block' : 'none';
     trans.forEach(element => element.style.display = display);
 }
 
-
-//fetch les donnees 
+$('#no').on('click',function(){
+  const div=document.querySelector("#alertAddRef")
+  div.style.display='none'
+})
 
 //End newlivraison

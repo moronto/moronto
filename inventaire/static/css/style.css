@@ -141,5 +141,33 @@ table {
     margin-bottom: 12px;
     padding:15PX;
 }
+.alertAddRef{
+    position:absolute;
+    width: 40%;
+    top:40%;
+    left:30%;
+    margin: 0 auto;
+    text-align: center;
+    padding:50px 10px;
+    background-color: rgb(217, 221, 217);
+    outline: 1px solid black;
+    z-index: 1000;
+    border-radius: 10px;
+    box-shadow: 10px 10px 30px 0px #222;
+}
+.alertAddRef P{
+    font-size: x-large;
+    color: black;
+    font-weight: 900;
+    }
+.alertAddRef a{
+    
+    width: 140px;
+    margin-left: 20px;
+    padding: 5px 10px;
+ 
+    font-size: larger;
+    transition: all .3s ease;
+}   
 
 /*end css for app livraison*/

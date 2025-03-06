@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
 from inventaire.models import *
 from datetime import timezone,datetime
 from django.contrib import messages
 from django.http import JsonResponse
+from django.urls import reverse
 
 def newLivraison(request):
     if request.method=='POST':
@@ -59,11 +60,16 @@ def newLivraison(request):
 def designation(request):
     ref=request.GET.get('valSearch')
     data=Stock.objects.filter(refMateriel=ref).values('designation')
+    print(len(data))
     if len(data)==0:
-        d={'data':""}
+        d={'designation':""}
+        print(d)
     else:
         d=data[0]    
+        print("ha mad prantir ",d)
 
     return JsonResponse({'data':d})
+
+
 
 

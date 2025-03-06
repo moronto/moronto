@@ -2,6 +2,13 @@
 
 {%  extends  'base.html'%}
 {% block content %}
+<div  id="alertAddRef" class="alertAddRef" style="display: none;">
+    <p>Le reference saise n'existe pas. Voulez vous L'ajouter<p>
+     <a id="yes" class="btn btn-success" href="{% url 'addstock'%}">Oui</a>   
+     <a id="no" class="btn btn-danger">No</a>   
+   
+
+</div>
 <form method="post">
     {% csrf_token %}
 <label for="info">Information Livraison</label>
@@ -24,7 +31,7 @@
     </div>
     <div class="col-md-2">
         <label for="dateLivraison">Date de Livraison</label>
-        <input type="date" name="dateLivraison" class="form-control">
+        <input type="date" name="dateLivraison" class="form-control" required>
     </div>
     <div class="col-md-2">
         <label for="typeLivraison">Type</label>
@@ -36,24 +43,23 @@
     </div>
     <div class="col-md-3">
         <label for="chantier">Chantier</label>
-        <input type="text" name="chantier" class="form-control">
+        <input type="text" name="chantier" class="form-control" required>
     </div>
     <div id="trans" class="row mt-2">
         <div class="col-md-3">
             <label for="typeTrans" >Transport a :</label>
         <select id="typeTrans" name="typeTrans" class="form-select" onchange="selectTrans()">
-            <option value="notre" selected>---------- </option>
-            <option value="notre">Notre charge</option>
-            <option value="client">La charge de client</option>
+            <option value="notre" selected>Notre charge</option>
+            <option value="client" >La charge de client </option>
         </select>
         </div>
         <div class="col-md-3">
-            <label for="matTrans" class="trans" style="display: none;">Matricule Transport :</label>
-            <input type="text" id="matTrans" name="matTrans" class="form-control trans"  style="display: none;" >
+            <label for="matTrans" class="trans" >Matricule Transport :</label>
+            <input type="text" id="matTrans" name="matTrans" class="form-control trans"   >
         </div>
         <div class="col-md-3">
-            <label for="condTrans" class="trans" style="display: none;">Chauffeur :</label>
-            <input type="text" id="condTrans" name="condTrans" class="form-control trans" style="display: none;" >
+            <label for="condTrans" class="trans" >Chauffeur :</label>
+            <input type="text" id="condTrans" name="condTrans" class="form-control trans"  >
         </div>
     
     </div>
@@ -66,18 +72,18 @@
     <div >
         <div class="row bg-black pt-2 pb-2 text-white  mb-2">
             <div class="col-md-2 ps-4 fs-4">Référence</div>
-            <div class="col-md-3 ps-4 fs-4">Designation</div>
+            <div class="col-md-4 ps-4 fs-4">Designation</div>
             <div class="col-md-2 ps-4 fs-4">Quantité</div>
-            <div class="col-md-5 ps-4 fs-4">Observations</div>
+            <div class="col-md-4 ps-4 fs-4">Observations</div>
         </div> 
     </div>
         <!-- zonne body -->
     <div id="body">
         <div class="row   mb-1">
-                <div class="col-md-2"><input name="refMateriel" id="refMateriel" type="text" class="form-control"></div>
-                <div class="col-md-3"><input name="designation" id="designation" type="text" class="form-control"></div>
-                <div class="col-md-2"><input name="qte" type="number" class="form-control"></div>
-                <div class="col-md-5"><input name="observations" type="text" class="form-control"></div>
+                <div class="col-md-2"><input required name="refMateriel" id="refMateriel" type="text" class="form-control"></div>
+                <div class="col-md-4"><input disabled name="designation" id="designation" type="text" class="form-control"></div>
+                <div class="col-md-2"><input value=1 name="qte" type="number" class="form-control"></div>
+                <div class="col-md-4"><input name="observations" type="text" class="form-control"></div>
         </div>
     </div>
     
