@@ -10,5 +10,18 @@
         <div class="col-md-2">Client</div>
         <div class="col-md-2">Chantier</div>
     </div>
+    <div class="body table-container">
+         {% for livraison in livraisonData %}
+     <div class="row p-2 text-dark fs-4">
+        <div class="col-md-2"><a href="{% url 'detailsLivraison' livraison.bl%}" style="text-decoration: none; font-size:x-large;">{{livraison.bl}}</a></div>
+        <div class="col-md-2">{{livraison.dateLivraison}}</div>
+        <div class="col-md-2">{{livraison.chargerAffaire}}</div>
+        <div class="col-md-2">{{livraison.typeLivraison}}</div>
+        <div class="col-md-2">{{livraison.client}}</div>
+        <div class="col-md-2">{{livraison.chantier}}</div>
+    </div>
+    {% endfor%}
+</div>
+
 </div>
 {% endblock content %}

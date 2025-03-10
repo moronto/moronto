@@ -9,8 +9,14 @@ from django.urls import reverse
 
 
 def livraison(request):
-
-    return render(request,'livraisons/livraison.html')
+    
+    data=Livraison.objects.all()
+    # if request.method=='POST':
+    return render(request,'livraisons/livraison.html',{
+            'title':'Livraisons',
+            'livraisonData':data
+            
+            })
 
 def newLivraison(request):
     if request.method=='POST':
@@ -32,15 +38,18 @@ def newLivraison(request):
             chargerAffaire=request.POST.get("chargerAffaire"),
             typeLivraison=request.POST.get("typeLivraison"),
             chantier=request.POST.get("chantier"),
-            created_by=User.username,
+            created_by=request.user.username,
            
         )
         bl.save()
         
-        # if len(req.getlist("refMateriel"))==1:
-        #     l=
+  
+     
+        
+        l=len(req.getlist("refMateriel"))
        
-        for i in range(len(req.getlist("refMateriel"))):
+        for i in range(l):
+            print(i)
             detail=DetailsLivraison(
                 bl=bl,
                 refMateriel=req.getlist('refMateriel')[i],
@@ -52,9 +61,9 @@ def newLivraison(request):
             )
             detail.save()
         messages.success(request,f'Vous avez ajouter BL N° {bl} avec succes')
+        return redirect('livraison')
         
     
-        print("fff",Chargesaffaire.objects.all())
 
     return render(request,'livraisons/newLivraison.html',{
         'title':'Ajouter nouveau',
@@ -72,7 +81,13 @@ def designation(request):
         d=data[0]    
 
     return JsonResponse({'data':d})
+def detailsLivraison(request,bl):
+    detail=Livraison.objects.filter(bl=bl)
 
+    return render(request,'livraisons/detailsLivraison.html',{
+        'title':f'Details de {bl}',
+        'detail':detail
+    })
 
 
 

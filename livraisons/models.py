@@ -24,7 +24,8 @@ class DetailsLivraison(models.Model):
     condTrans=models.CharField(max_length=30,null=True)
     observations=models.CharField(max_length=200,null=True)
     def __str__(self):
-        return self.refMateriel
+        return str(self.bl)
+
 
 
     

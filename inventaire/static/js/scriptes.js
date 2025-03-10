@@ -7,12 +7,12 @@
 
 
 function addLigne(idName){
-
     let d=document.querySelector(idName);
     let mydiv=d.lastElementChild;
     let g=mydiv.cloneNode(true);
     g.querySelectorAll('input').forEach(input => {
-        input.value = '';})
+        input.value = '';
+    })
     d.appendChild(g)
 }
 
@@ -133,29 +133,7 @@ $(document).ready(function(){
    
     });
 
-    $('#refMateriel').on('change',function(){
-        var valSearch=$(this).val()
-        $.ajax({
-            url:'/designation/',
-            method: 'GET',
-            caches:false,
-            data: {'valSearch':valSearch},
-            success: function(response) {
-                const designation=$('#designation');
-                const alertAddRef=document.querySelector('.alertAddRef');
-                if(response.data.designation===""){
-                    alertAddRef.style.display='block';
-                }
-                else{
-                    designation.val(response.data.designation)
-                } 
-            }, 
-        
-
-        });
-   
-   
-    });
+    
    
 
 });
@@ -174,10 +152,31 @@ function selectTrans() {
 $('#no').on('click',function(){
   const div=document.querySelector("#alertAddRef")
   div.style.display='none'
-  document.querySelector('#refMateriel').value=""
-  document.querySelector('#observations').value=""
- 
 })
 
 
+function inputChange(idd){
+        var valSearch=idd.value
+     
+        $.ajax({
+            url:'/designation/',
+            method: 'GET',
+            caches:false,
+            data: {'valSearch':valSearch},
+            success: function(response) {
+                const designation=idd.parentElement.nextElementSibling.firstChild;
+                const alertAddRef=document.querySelector('.alertAddRef');
+                if(response.data.designation===""){
+                    alertAddRef.style.display='block';
+                }
+                else{
+                    designation.value=response.data.designation
+                } 
+            }, 
+        
+
+        });
+   
+   
+}
 //End newlivraison

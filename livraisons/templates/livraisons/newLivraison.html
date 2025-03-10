@@ -16,11 +16,13 @@
 <div id="info" class="row borderShadaw mb-3">
     <div class="col-md-3">
         <label for="client">Client</label>
-        <select name="client" class="form-select">
-            {% for c in client %}
-            <option value="{{c}}">{{c}}</option>
+            <input list="listClient" class="form-select" name="client" required>
+            <datalist id="listClient" >
+                {% for c in client %}
+            <option value="{{c}}">
             {% endfor %}
-        </select>
+            </datalist>
+        
     </div>
     <div class="col-md-2">
         <label for="">Charger D'affaire</label>
@@ -66,12 +68,12 @@
     <!-- zonne body -->
     <div id="body">
         <div class="row   mb-1">
-            <div class="col-md-1"><input required name="refMateriel" id="refMateriel" type="text" class="form-control"></div>
-            <div class="col-md-3"><input disabled name="designation" id="designation" type="text" class="form-control"></div>
-            <div class="col-md-1"><input value=1 name="qte" type="number" class="form-control"></div>
-            <div class="col-md-2"><input type="text" id="matTrans" name="matTrans" class="form-control trans"   ></div>
-            <div class="col-md-2"><input type="text" id="condTrans" name="condTrans" class="form-control trans"  ></div>
-            <div class="col-md-3"><input id='observations' name="observations" type="text" class="form-control"></div>
+            <div class="col-md-1"><input  name="refMateriel"  type="text" required class="form-control refMateriel" onchange="inputChange(this)"></div>
+            <div class="col-md-3"><input  name="designation"  type="text" class="form-control" ></div>
+            <div class="col-md-1"><input  name="qte" type="number" class="form-control" value=1></div>
+            <div class="col-md-2"><input  name="matTrans" type="text"   class="form-control trans"></div>
+            <div class="col-md-2"><input  name="condTrans" type="text"   class="form-control trans"  ></div>
+            <div class="col-md-3"><input  name="observations" type="text" class="form-control"></div>
         </div>
     </div>
     
@@ -80,7 +82,7 @@
 <div class="row borderShadaw">
     <div class="col-md-4">
         
-        <input type="submit" value="Ajouter" class="btn btn-success w-90" >
+        <input type="submit" value="Enregistrer" class="btn btn-success w-90" >
         
     </div>
     <div class="col-md-4">
