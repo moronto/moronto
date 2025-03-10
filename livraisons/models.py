@@ -5,12 +5,10 @@ class Livraison(models.Model):
     bl=models.CharField(max_length=10,primary_key=True)
     client=models.CharField(max_length=60)
     dateLivraison=models.DateField()
-    chargerAffaire=models.CharField(max_length=40)
     typeLivraison=models.CharField(max_length=30)
+    chargerAffaire=models.CharField(max_length=40)
     chantier=models.CharField(max_length=50)
-    typeTrans=models.CharField(max_length=20)
-    matTrans=models.CharField(max_length=40,null=True)
-    condTrans=models.CharField(max_length=30,null=True)
+    created_by=models.CharField(max_length=50)
     def __str__(self):
         return str(self.bl)
     
@@ -22,6 +20,8 @@ class DetailsLivraison(models.Model):
     refMateriel=models.CharField(max_length=30)
     designation=models.CharField(max_length=50)
     qte=models.IntegerField()
+    matTrans=models.CharField(max_length=40,null=True)
+    condTrans=models.CharField(max_length=30,null=True)
     observations=models.CharField(max_length=200,null=True)
     def __str__(self):
         return self.refMateriel

@@ -2,10 +2,11 @@
 
 {%  extends  'base.html'%}
 {% block content %}
+
+
 <div  id="alertAddRef" class="alertAddRef" style="display: none;">
-    <p>Le reference saise n'existe pas. Voulez vous L'ajouter<p>
-     <a id="yes" class="btn btn-success" href="{% url 'addstock'%}">Oui</a>   
-     <a id="no" class="btn btn-danger">No</a>   
+    <p>La référence saisie n'existe pas. <p>
+     <a id="no" class="btn btn-danger">Quitter</a>   
    
 
 </div>
@@ -45,24 +46,7 @@
         <label for="chantier">Chantier</label>
         <input type="text" name="chantier" class="form-control" required>
     </div>
-    <div id="trans" class="row mt-2">
-        <div class="col-md-3">
-            <label for="typeTrans" >Transport a :</label>
-        <select id="typeTrans" name="typeTrans" class="form-select" onchange="selectTrans()">
-            <option value="notre" selected>Notre charge</option>
-            <option value="client" >La charge de client </option>
-        </select>
-        </div>
-        <div class="col-md-3">
-            <label for="matTrans" class="trans" >Matricule Transport :</label>
-            <input type="text" id="matTrans" name="matTrans" class="form-control trans"   >
-        </div>
-        <div class="col-md-3">
-            <label for="condTrans" class="trans" >Chauffeur :</label>
-            <input type="text" id="condTrans" name="condTrans" class="form-control trans"  >
-        </div>
     
-    </div>
 </div>
 
 
@@ -71,19 +55,23 @@
 <div  id="materiel" class=" borderShadaw mat">
     <div >
         <div class="row bg-black pt-2 pb-2 text-white  mb-2">
-            <div class="col-md-2 ps-4 fs-4">Référence</div>
-            <div class="col-md-4 ps-4 fs-4">Designation</div>
-            <div class="col-md-2 ps-4 fs-4">Quantité</div>
-            <div class="col-md-4 ps-4 fs-4">Observations</div>
+            <div class="col-md-1 ps-4 fs-4">Référence</div>
+            <div class="col-md-3 ps-4 fs-4">Designation</div>
+            <div class="col-md-1 ps-4 fs-4">Quantité</div>
+            <div class="col-md-2 ps-4 fs-4">Matricule Transport</div>
+            <div class="col-md-2 ps-4 fs-4">Chauffeur</div>
+            <div class="col-md-3 ps-4 fs-4">Observations</div>
         </div> 
     </div>
-        <!-- zonne body -->
+    <!-- zonne body -->
     <div id="body">
         <div class="row   mb-1">
-                <div class="col-md-2"><input required name="refMateriel" id="refMateriel" type="text" class="form-control"></div>
-                <div class="col-md-4"><input disabled name="designation" id="designation" type="text" class="form-control"></div>
-                <div class="col-md-2"><input value=1 name="qte" type="number" class="form-control"></div>
-                <div class="col-md-4"><input name="observations" type="text" class="form-control"></div>
+            <div class="col-md-1"><input required name="refMateriel" id="refMateriel" type="text" class="form-control"></div>
+            <div class="col-md-3"><input disabled name="designation" id="designation" type="text" class="form-control"></div>
+            <div class="col-md-1"><input value=1 name="qte" type="number" class="form-control"></div>
+            <div class="col-md-2"><input type="text" id="matTrans" name="matTrans" class="form-control trans"   ></div>
+            <div class="col-md-2"><input type="text" id="condTrans" name="condTrans" class="form-control trans"  ></div>
+            <div class="col-md-3"><input id='observations' name="observations" type="text" class="form-control"></div>
         </div>
     </div>
     

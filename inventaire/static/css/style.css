@@ -11,7 +11,8 @@
 
 body {
     
-    background:#BBB
+    background:#BBB;
+    position: relative;
        
 
 }
@@ -169,5 +170,6 @@ table {
     font-size: larger;
     transition: all .3s ease;
 }   
+
 
 /*end css for app livraison*/

@@ -1,17 +1,20 @@
 from django.shortcuts import render,redirect
 from .models import *
+from django.contrib.auth.models import User
 from inventaire.models import *
 from datetime import timezone,datetime
 from django.contrib import messages
 from django.http import JsonResponse
 from django.urls import reverse
 
+
+def livraison(request):
+
+    return render(request,'livraisons/livraison.html')
+
 def newLivraison(request):
     if request.method=='POST':
         req=request.POST
-        print(request.POST.get("matTrans"))
-
-
         currentYear=datetime.now().strftime("%Y").strip()
         bls=[]
         livraison=Livraison.objects.all()
@@ -29,19 +32,22 @@ def newLivraison(request):
             chargerAffaire=request.POST.get("chargerAffaire"),
             typeLivraison=request.POST.get("typeLivraison"),
             chantier=request.POST.get("chantier"),
-            typeTrans=request.POST.get("typeTrans"),
-            matTrans=request.POST.get("matTrans"),
-            condTrans=request.POST.get("condTrans"),
+            created_by=User.username,
+           
         )
         bl.save()
         
-
+        # if len(req.getlist("refMateriel"))==1:
+        #     l=
+       
         for i in range(len(req.getlist("refMateriel"))):
             detail=DetailsLivraison(
                 bl=bl,
                 refMateriel=req.getlist('refMateriel')[i],
                 designation=req.getlist('designation')[i],
                 qte=int(req.getlist('qte')[i]),
+                matTrans=req.getlist("matTrans")[i],
+                condTrans=req.getlist("condTrans")[i],
                 observations=req.getlist('observations')[i],
             )
             detail.save()
@@ -60,13 +66,10 @@ def newLivraison(request):
 def designation(request):
     ref=request.GET.get('valSearch')
     data=Stock.objects.filter(refMateriel=ref).values('designation')
-    print(len(data))
     if len(data)==0:
         d={'designation':""}
-        print(d)
     else:
         d=data[0]    
-        print("ha mad prantir ",d)
 
     return JsonResponse({'data':d})
 

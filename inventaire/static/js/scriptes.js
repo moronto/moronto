@@ -174,6 +174,10 @@ function selectTrans() {
 $('#no').on('click',function(){
   const div=document.querySelector("#alertAddRef")
   div.style.display='none'
+  document.querySelector('#refMateriel').value=""
+  document.querySelector('#observations').value=""
+ 
 })
+
 
 //End newlivraison
