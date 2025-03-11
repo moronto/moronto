@@ -2,5 +2,58 @@
 
 {% block content %}
 
+<div class="detailLivraison  borderShadaw w-75 ">
+    <div class="row">
+        <div class="col-md-6">
+            <label for="bl">BL N° :</label>
+            <input type="text" name="bl" class="form-control" value="{{detail.bl}}">
+        </div>
+        <div class="col-md-6">
+            <label for="dateLivraison">Date Livraison :</label>
+            <input type="text" name="dateLivraison" class="form-control" value="{{detail.dateLivraison}}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="chargerAffaire">Charger d'affaire :</label>
+            <input type="text" name="chargerAffaire" class="form-control" value="{{detail.chargerAffaire}}">
+        </div>
+        <div class="col-md-6">
+            <label for="typeLivraison">Type de Livraison :</label>
+            <input type="text" name="typeLivraison" class="form-control" value="{{detail.typeLivraison}}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="client">Client :</label>
+            <input type="text" name="client" class="form-control" value="{{detail.client}}">
+        </div>
+        <div class="col-md-6">
+            <label for="chantier">Chantier :</label>
+            <input type="text" name="chantier" class="form-control" value="{{detail.chantier}}">
+        </div>
+    </div>
+</div>
+<div class="borderShadaw">
+    <div class="row bg-black pt-2 pb-2 text-white ms-0 me-0 mb-2">
+        <div class="col-md-1 ps-4 fs-4">Référence</div>
+        <div class="col-md-4 ps-4 fs-4">Designation</div>
+        <div class="col-md-1 ps-4 fs-4">Quantité</div>
+        <div class="col-md-2 ps-4 fs-4">Matricule Transport</div>
+        <div class="col-md-2 ps-4 fs-4">Chauffeur</div>
+        <div class="col-md-2 ps-4 fs-4">Observations</div>
+    </div>
+    {% for data in detailMat%}
+    <div class="row bg-info pt-2 pb-2 text-dark ms-0 me-0 mb-2">
+        <div class="col-md-1 ps-4 fs-4">{{data.refMateriel}}</div>
+        <div class="col-md-4 ps-4 fs-4">{{data.designation}}</div>
+        <div class="col-md-1 ps-4 fs-4">{{data.qte}}</div>
+        <div class="col-md-2 ps-4 fs-4">{{data.matTrans}}</div>
+        <div class="col-md-2 ps-4 fs-4">{{data.condTrans}}</div>
+        <div class="col-md-2 ps-4 fs-4">{{data.observations}}</div>
+    </div>
+    {% endfor %}
+</div>
+
 
 {% endblock content %}

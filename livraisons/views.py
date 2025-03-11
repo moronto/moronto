@@ -82,11 +82,14 @@ def designation(request):
 
     return JsonResponse({'data':d})
 def detailsLivraison(request,bl):
-    detail=Livraison.objects.filter(bl=bl)
+    detail=Livraison.objects.filter(bl=bl).values()[0]
+    detailMat=DetailsLivraison.objects.filter(bl=bl).values()
 
     return render(request,'livraisons/detailsLivraison.html',{
         'title':f'Details de {bl}',
-        'detail':detail
+        'detail':detail,
+        'detailMat':detailMat,
+         
     })
 
 

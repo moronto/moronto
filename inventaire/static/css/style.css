@@ -172,4 +172,11 @@ table {
 }   
 
 
+/*css of detailLivraison*/
+
+.detailLivraison{
+    margin: 20px auto;
+    padding: 20px;
+}
+
 /*end css for app livraison*/
