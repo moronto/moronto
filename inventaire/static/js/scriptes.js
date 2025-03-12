@@ -13,6 +13,7 @@ function addLigne(idName){
     g.querySelectorAll('input').forEach(input => {
         input.value = '';
     })
+    g.children[2].firstChild.value=1
     d.appendChild(g)
 }
 

@@ -92,5 +92,10 @@ def detailsLivraison(request,bl):
          
     })
 
+def deleteLivraison(request,bl):
+    BL=Livraison.objects.filter(bl=bl)
+    BL.delete()
+    messages.info(request,f' Vous avez Supprimer BL N° : {bl} avec succes')
 
+    return redirect('livraison')
 

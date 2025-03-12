@@ -5,20 +5,28 @@
     <div class="row bg-black p-2 text-white fs-4">
         <div class="col-md-2">Référence</div>
         <div class="col-md-2">Date Livraison</div>
-        <div class="col-md-2">charger d'affaire</div>
-        <div class="col-md-2">Type Livraison</div>
-        <div class="col-md-2">Client</div>
-        <div class="col-md-2">Chantier</div>
+        <div class="col-md-3">Client</div>
+        <div class="col-md-3">Chantier</div>
+        <div class="col-md-2">Action</div>
     </div>
-    <div class="body table-container">
+    <div class="body ">
          {% for livraison in livraisonData %}
      <div class="row p-2 text-dark fs-4">
-        <div class="col-md-2"><a href="{% url 'detailsLivraison' livraison.bl%}" style="text-decoration: none; font-size:x-large;">{{livraison.bl}}</a></div>
+        <div class="col-md-2">{{livraison.bl}}</div>
         <div class="col-md-2">{{livraison.dateLivraison}}</div>
-        <div class="col-md-2">{{livraison.chargerAffaire}}</div>
-        <div class="col-md-2">{{livraison.typeLivraison}}</div>
-        <div class="col-md-2">{{livraison.client}}</div>
-        <div class="col-md-2">{{livraison.chantier}}</div>
+        <div class="col-md-3">{{livraison.client}}</div>
+        <div class="col-md-3">{{livraison.chantier}}</div>
+        <div class="col-md-2">
+            <a class="text-decoration-none" href="{% url 'detailsLivraison' livraison.bl%}">
+                <i class='fa fa-file  fa-2x text-success ' ></i>
+            </a>  
+            <a class="text-decoration-none" href="#">
+                <i class='fa fa-edit fa-2x text-warning ms-5'></i>
+            </a>    
+            <a class="text-decoration-none" href="{% url 'deleteLivraison' livraison.bl%}">
+                <i class='fa fa-trash fa-2x text-danger ms-5'></i>
+            </a>
+        </div>
     </div>
     {% endfor%}
 </div>

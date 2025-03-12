@@ -7,6 +7,7 @@ urlpatterns = [
     path('newlivraison/',newLivraison,name='newLivraison'),
     path('designation/',designation,name='designation'),
     path('detailsLivraison/<str:bl>',detailsLivraison,name='detailsLivraison'),
+    path('deleteLivraison/<str:bl>',deleteLivraison,name='deleteLivraison'),
 
   
 ]
