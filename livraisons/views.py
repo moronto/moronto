@@ -39,13 +39,10 @@ def newLivraison(request):
             typeLivraison=request.POST.get("typeLivraison"),
             chantier=request.POST.get("chantier"),
             created_by=request.user.username,
-           
+    
         )
-        bl.save()
-        
   
-     
-        
+        bl.save()
         l=len(req.getlist("refMateriel"))
        
         for i in range(l):
