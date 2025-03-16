@@ -28,4 +28,9 @@ admin.site.register(GroupeElectrogene,GroupeElectrogeneAdmin)
 class CabinesAutonomeAdmin(admin.ModelAdmin):
     list_display=("gamme","dimension","color","refMateriel")
 admin.site.register(CabinesAutonome,CabinesAutonomeAdmin)
-# Register your models here.
+
+
+class MovementAdmin(admin.ModelAdmin):
+    list_display=("id","typeMovement","dateMovement","typeLocation","refMateriel","designation","qte","matTrans","condTrans","lieu","observations")
+
+admin.site.register(Movement,MovementAdmin)    

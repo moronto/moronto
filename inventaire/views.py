@@ -196,6 +196,8 @@ def detailStock(request, ref):
     })
 @login_required
 def addStock(request):
+
+
     if request.method =='POST':
         st=Stock(refMateriel=request.POST.get("refMateriel"),
                 designation=request.POST.get("designation"),
@@ -233,3 +235,35 @@ def addStock(request):
     return render(request,'inventaire/addstock.html',{
         'title': 'Ajtouer element',
                   })
+
+# views of movement
+def movement(request):
+    data=Movement.objects.all()
+
+    return render(request,"inventaire/movements.html",{'data':data})
+def searchMovement(request):
+    if request.method=='GET':
+       if request.GET.get('valSearch')=='':
+            data=Movement.objects.all()
+       else:    
+          data=Movement.objects.filter(Q(refMateriel__icontains=request.GET.get('valSearch'))|
+                                          Q(designation__icontains=request.GET.get('valSearch'))|
+                                          Q(client__icontains=request.GET.get('valSearch'))|
+                                          Q(dateMovement__icontains=request.GET.get('valSearch'))|
+                                          Q(typeMovement__icontains=request.GET.get('valSearch'))
+                                          )
+          
+
+       results = [
+        {
+            'typeMovement': dt.typeMovement,
+            'dateMovement': dt.dateMovement.strftime('%d-%m-%Y'),
+            'refMateriel': dt.refMateriel,
+            'designation': dt.designation,
+            'client': dt.client,
+            'urlDetails':reverse('detailReservation',args=[dt.id]),
+            'urlDelete':reverse('deleteReservation',args=[dt.id]),
+        }
+        for dt in data
+                ]
+       return JsonResponse({'data':results})

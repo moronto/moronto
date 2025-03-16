@@ -83,4 +83,19 @@ class CabinesAutonome(models.Model):
     color=models.CharField(max_length=50)
     refMateriel=models.ForeignKey(Stock, on_delete=models.CASCADE)
 
+class Movement(models.Model):
+    typeMovement=models.CharField(max_length=20)
+    dateMovement=models.DateField()
+    typeLocation=models.CharField(max_length=30)
+    depot=models.CharField(max_length=30)
+    refMateriel=models.CharField(max_length=30)
+    designation=models.CharField(max_length=50)
+    qte=models.IntegerField()
+    client=models.CharField(max_length=60)
+    lieu=models.CharField(max_length=60)
+    matTrans=models.CharField(max_length=40,null=True)
+    condTrans=models.CharField(max_length=30,null=True)
+    observations=models.CharField(max_length=200,null=True)
+    def __str__(self):
+        return self.refMateriel
 

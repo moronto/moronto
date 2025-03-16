@@ -181,3 +181,50 @@ function inputChange(idd){
    
 }
 //End newlivraison
+
+//start movement
+$('#searchMovement').on('input',function(){
+    var valSearch=$(this).val()
+    $.ajax({
+        url:'/searchMovement/',
+        method: 'GET',
+        caches:false,
+        data: {'valSearch':valSearch},
+        success: function(response) {
+            const bodyTable=$('#bodyMovement');
+            bodyTable.empty();
+            response.data.forEach(function(move) {
+
+                const row=`
+        <div class="row bg-secondary-subtle p-2">
+            <div class="col-md-2">${move.typeMovement}</div>
+            <div class="col-md-2">${move.dateMovement}</div>
+            <div class="col-md-2">${move.refMateriel}</div>
+            <div class="col-md-2">${move.designation}</div>
+            <div class="col-md-2">${move.client}</div>
+            <div class="col-md-2  flex-row ">
+                
+                    <a  href="${move.urlDetails}">
+                        <input type="button" class="btn btn-info" value="Details">
+                    </a>
+                      
+                    <a  href="${move.urlDelete}">
+                        <input type="button" class="btn btn-danger" value="Supprimer">
+                    </a>
+            </div>
+        </div>   
+                
+                `
+                bodyTable.append(row)
+                
+            });
+             
+        }, 
+    
+
+    });
+
+
+});
+
+//end movement

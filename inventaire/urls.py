@@ -12,5 +12,7 @@ urlpatterns = [
     path('stock/',stock,name='stock'),
     path('detailStock/<str:ref>',detailStock,name='detailStock'),
     path('addstock/',addStock,name='addstock'),
+    path('movement/',movement,name='movement'),
+    path('searchMovement/',searchMovement,name='searchMovement'),
 
 ]

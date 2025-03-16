@@ -27,17 +27,7 @@ class DetailsLivraison(models.Model):
         return str(self.bl)
     
 
-class Mouvement(models.Model):
-    typeMovement=models.CharField(max_length=20)
-    dateMovement=models.DateField()
-    refMateriel=models.CharField(max_length=30)
-    designation=models.CharField(max_length=50)
-    qte=models.IntegerField()
-    matTrans=models.CharField(max_length=40,null=True)
-    condTrans=models.CharField(max_length=30,null=True)
-    observations=models.CharField(max_length=200,null=True)
-    def __str__(self):
-        return self.refMateriel
+
 
 
 

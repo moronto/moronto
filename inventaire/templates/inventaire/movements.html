@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<div class=" mt-1">
+    <div class="row m-3 ">
+        <div class="col-md-3"><label for="search">La valeur a rechercher :</label></div>
+        <div class="col-md-9"> <input id="searchMovement" type="text" class="form-control"></div>
+    </div>
+</div>    
+
+
+
+<div class="row bg-dark p-1 text-white">
+    <div class="col-md-2">Mouvement</div>
+    <div class="col-md-2">Date Mouvement</div>
+    <div class="col-md-2">Reference</div>
+    <div class="col-md-2">Designation</div>
+    <div class="col-md-2">Client</div>
+    <div class="col-md-2">Action</div>
+
+</div>
+<div  id="bodyMovement">
+{% for d in data%}
+    <div class="row bg-secondary-subtle p-2">
+        <div class="col-md-2">{{d.typeMovement}}</div>
+        <div class="col-md-2">{{d.dateMovement|date:"d-m-Y"}}</div>
+        <div class="col-md-2">{{d.refMateriel}}</div>
+        <div class="col-md-2">{{d.designation}}</div>
+        <div class="col-md-2">{{d.client}}</div>
+        <div class="col-md-2 flex-row">
+            <a href="{% url 'home'%}"><input type="button" class="btn btn-info" value="Details"></a>
+            <a href=""><input type="button" class="btn btn-danger" value="Supprimer"></a>
+        </div>
+    </div>
+    {% endfor%}
+</div>
+
+{% endblock content%}
