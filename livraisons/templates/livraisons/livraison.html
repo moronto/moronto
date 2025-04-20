@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="livraison">
-    <div class="row bg-black p-2 text-white fs-4">
+    <div class="row bg-black p-2 text-white fs-6">
         <div class="col-md-2">Référence</div>
         <div class="col-md-2">Date Livraison</div>
         <div class="col-md-3">Client</div>
@@ -11,7 +11,7 @@
     </div>
     <div class="body ">
          {% for livraison in livraisonData %}
-     <div class="row p-2 text-dark fs-4">
+     <div class="row p-2 text-dark fs-6">
         <div class="col-md-2">{{livraison.bl}}</div>
         <div class="col-md-2">{{livraison.dateLivraison}}</div>
         <div class="col-md-3">{{livraison.client}}</div>

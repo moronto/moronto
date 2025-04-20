@@ -1,5 +1,67 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 
 {% block content %}
+
+<div class="bg-primary m-auto mt-5 p-5 w-75">
+    <div class="row mb-1 fs-6">
+        <label for="typeLocation">Type de Mouvement </label>
+        <input name="typeMovement" type="text" class="form-control fs-6" value="{{data.typeMovement}}">
+    </div>
+    <div class="row mb-1 fs-6">
+        <label for="dateMovement">Date de Mouvement</label>
+        <input name="dateMovement" type="text" class="form-control fs-6" value="{{data.dateMovement|date:'d/m/Y'}}">
+    </div>
+    <div class="row mb-1 fs-6">
+        <label for="typeLocation">Type de Location</label>
+        <input name="typeLocation" type="text" class="form-control fs-6" value="{{data.typeLocation}}">
+        
+    </div>
+    <div class="row mb-1 fs-6">
+        <label for="depo">Depot</label>
+        <input name="depot" type="text" class="form-control fs-6" value="{{data.depot}}">
+        
+    </div>
+    <div class="row mb-1 fs-6">
+        <label for="refMateriel">Reference Materiel</label>
+        <input name="refMateriel" type="text" class="form-control fs-6" value="{{data.refMateriel}}">
+        
+    </div>
+    <div class="row mb-1 fs-6">
+        <label for="designation">Designation</label>
+        <input name="designation" type="text" class="form-control fs-6" value="{{data.designation}}">
+        
+    </div>
+    <div class="row mb-1 fs-6">
+        <label for="qte">Quantité</label>
+        <input name="qte" type="text" class="form-control fs-6" value="{{data.qte}}">
+       
+    </div>
+    <div class="row mb-1 fs-6">
+        <label for="client">Client</label>
+        <input name="client" type="text" class="form-control fs-6" value="{{data.client}}">
+       
+    </div>
+    <div class="row mb-1 fs-6">
+        <label for="lieu">Lieu de location</label>
+        <input name="lieu" type="text" class="form-control fs-6" value="{{data.lieu}}">
+        
+    </div>
+    <div class="row mb-1 fs-6">
+        <label for="matTrans">Matricule Transport</label>
+        <input name="matTrans" type="text" class="form-control fs-6" value="{{data.matTrans}}">
+       
+    </div>
+    <div class="row mb-1 fs-6">
+        <label for="condTrans">Conducteur transport</label>
+        <input name="condTrans" type="text" class="form-control fs-6" value="{{data.condTrans}}">
+        
+    </div>
+    <div class="row mb-1 fs-6">
+        <label for="observations">Obsrvations</label>
+        <input name="observations" type="text" class="form-control fs-6" value="{{data.observations}}">
+        
+    </div>
+</div>
+
 
 {% endblock content %}

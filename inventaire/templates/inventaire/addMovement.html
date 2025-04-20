@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .myAlert{
+        display: none;
+        position: fixed;
+        width: 30%;
+        height:150px;
+        left:50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+        padding: 30px;
+        background-color: white;
+        border: 1px solid #333;
+        box-shadow: 0 0 10px rgba(0,0,0,.0.1);
+        transition: 2s;
+        z-index: 1000;
+    }
+    .alertTitle{
+        text-align: center;
+        margin: 10px 0;
+    }
+    .alertBody{
+        text-align: center;
+        font-size: 20px;
+    }
+    
+</style>
+<div class="myAlert" id="myAlert">
+    <h5 class="alertTitle">titlr</h5>
+    <hr>
+    <div class="alertBody">Lorem ipsum dolor sit.</div>
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+<div class="bg-primary m-auto mt-2 p-5 w-75 addMove">
+    <div class="row">
+        <div class="col-md-6">Type de Mouvement</div>
+        <div class="col-md-6">
+            <select name="typeMovement" id="typeMovement">
+                <option>ENTREE</option>
+                <option>SORTIE</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">Date de Mouvement</div>
+        <div class="col-md-6"><input type="date" required name="dateMovement"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">Type de Location</div>
+        <div class="col-md-6">
+            <select name="typeLocation" >
+                <option>CHANTIER</option>
+                <option>EVENEMENT</option>
+                <option>VENTE</option>
+            </select>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">Depot</div>
+        <div class="col-md-6">
+            <select name="depot" >
+                <option>BOUSKORA</option>
+                <option>BERRCHID</option>
+                <option>EL JORF </option>
+                <option>MARRAKECH</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">Reference Materiel</div>
+        <div class="col-md-6">
+            <input list="ref" name="refMateriel" id="refMateriel" >
+            <datalist id="ref">
+                {% for mat in materiel%}
+                <opition>{{mat.refMateriel}}</opition>
+                {% endfor%}
+            </datalist>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">Designation</div>
+        <div class="col-md-6"><input type="text" id="designation" name="designation" ></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">Quantité</div>
+        <div class="col-md-6"><input name="qte" type="text" value="1"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">Client</div>
+        <div class="col-md-6">
+            <input list="clt" name="client" >
+            <datalist id="clt">
+                {% for clt in client %}
+                <opition>{{clt}}</opition>
+                {% endfor%}
+            </datalist>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">Lieu de location</div>
+        <div class="col-md-6"><input type="text" name="lieu" id="lieu" required></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">Matricule Transport</div>
+        <div class="col-md-6"><input type="text" name="matTrans"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">Conducteur transport</div>
+        <div class="col-md-6"><input type="text" name="condTrans"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">Obsrvations</div>
+        <div class="col-md-6"><input type="text" name="observations"></div>
+    </div>
+    <div class="row justify-content-end">
+        <button type="submit" class="btn btn-success mt-3 w-25 ">Enregistrer</button>
+    </div>
+</div>
+</form>
+
+{% endblock content %}

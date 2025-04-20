@@ -14,5 +14,9 @@ urlpatterns = [
     path('addstock/',addStock,name='addstock'),
     path('movement/',movement,name='movement'),
     path('searchMovement/',searchMovement,name='searchMovement'),
+    path('detailMovement/<int:id>',detailMovement,name='detailMovement'),
+    path('deleteMovement/<int:id>',deleteMovement,name='deleteMovement'),
+    path('addMovement/',addMovement,name='addMovement'),
+    path('searchDesignation/',searchDesignation,name='searchDesignation'),
 
 ]

@@ -22,4 +22,5 @@ urlpatterns = [
     path('',include('inventaire.urls')),
      path('', include('accounts.urls')),
      path('', include('livraisons.urls')),
+     path('api/', include('api.urls')),
 ]

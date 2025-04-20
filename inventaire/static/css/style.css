@@ -180,3 +180,17 @@ table {
 }
 
 /*end css for app livraison*/
+
+/* start addmovement css*/
+.addMove input,select{
+    padding: 10px;
+    background-color: rgb(151, 140, 161);
+    border:none;
+    width: 100%;
+ 
+
+}
+.addMove .row{
+    margin-bottom: 5px;
+}
+/* end addmovement css*/

@@ -1,6 +1,59 @@
 {% extends 'base.html' %}
 
 {% block content%}
+<style>
+    .promptDelete{
+       
+        position: fixed;
+        top:0;
+        left:0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0,0, 0, .8);
+        
+    }
+    .msg{
+       
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%);
+        background-color: rgb(211, 211, 224);
+        width: 600px;
+        padding: 20px;
+        align-items: center;
+        border: 2px solid gray;
+        border-radius: 20px;
+        box-shadow: 5px 5px 3px 3px rgba(0,0, 0, .5);
+    }
+</style>
+<script>
+    function annuler(){
+     document.querySelector('.promptDelete').style.display='none'
+
+       
+    }
+    function addHref(url){
+        let d=document.querySelector('.promptDelete')
+        if(d.style.display === 'none'){
+            console.log(url)
+            d.style.display='block'
+            link=document.querySelector("#btnSupprimer")
+            link.href= url
+            
+        }
+    }
+</script>
+<div class="promptDelete" style="display: none;">
+    <div class="msg " >
+        <h3>Voulez vous supprimer ce Mouvement ?</h3>
+        <div class="d-flex justify-content-center">
+            <a  id='btnSupprimer' class="btn btn-success w-25">Oui</a>
+            <button class="btn btn-danger ms-4 w-25" onclick="annuler()">Non</button>
+        </div>
+    </div>
+</div>
+
 <div class=" mt-1">
     <div class="row m-3 ">
         <div class="col-md-3"><label for="search">La valeur a rechercher :</label></div>
@@ -21,6 +74,7 @@
 </div>
 <div  id="bodyMovement">
 {% for d in data%}
+{% url 'deleteMovement' d.id  as url %}
     <div class="row bg-secondary-subtle p-2">
         <div class="col-md-2">{{d.typeMovement}}</div>
         <div class="col-md-2">{{d.dateMovement|date:"d-m-Y"}}</div>
@@ -28,8 +82,8 @@
         <div class="col-md-2">{{d.designation}}</div>
         <div class="col-md-2">{{d.client}}</div>
         <div class="col-md-2 flex-row">
-            <a href="{% url 'home'%}"><input type="button" class="btn btn-info" value="Details"></a>
-            <a href=""><input type="button" class="btn btn-danger" value="Supprimer"></a>
+            <a href="{% url 'detailMovement' d.id %}"><input type="button" class="btn btn-info" value="Details"></a>
+            <a onclick="addHref('{{url}}')" class="btn btn-danger"> Supprimer</a>
         </div>
     </div>
     {% endfor%}

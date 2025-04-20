@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.urls import reverse
+import json
 from django.db.models import Q
 from django.http import JsonResponse
 from django.core import serializers
@@ -267,3 +268,79 @@ def searchMovement(request):
         for dt in data
                 ]
        return JsonResponse({'data':results})
+def detailMovement(request,id):
+    data=Movement.objects.filter(id=id).values()[0]
+
+    return render(request,"inventaire/detailMovement.html",{'data':data})
+def addMovement(request):
+    materiel=Stock.objects.all()
+    if request.method =='POST':    
+        move=Movement(
+                        typeMovement=request.POST.get("typeMovement"),
+                        dateMovement=request.POST.get("dateMovement"),
+                        typeLocation=request.POST.get("typeLocation"),
+                        depot=request.POST.get("depot"),
+                        refMateriel=request.POST.get("refMateriel"),
+                        designation=request.POST.get("designation"),
+                        qte=request.POST.get("qte"),
+                        client=request.POST.get("client"),
+                        lieu=request.POST.get("lieu"),
+                        matTrans=request.POST.get("matTrans"),
+                        condTrans=request.POST.get("condTrans"),
+                        observations=request.POST.get("observations"),
+                )
+                    
+
+        move.save()
+        messages.success(request,f"Vous avez ajouter  {request.POST.get('typeMovement')} de {request.POST.get('refMateriel')} avec success")
+        return redirect('movement')       
+        
+    
+
+    return render(request,"inventaire/addMovement.html",{
+
+        'title':'Ajouter Mouvement',
+        'materiel':materiel,
+        'client':['SOGEA','NGE','TGCC','AVANT SCENE','ACWA POWER','SENER']
+
+    })
+
+
+def searchDesignation(request):
+    if request.method=='GET':
+       da={}  
+       dispo=""
+       lieu=request.GET.get('lieu')
+       typeMove=request.GET.get('typeMovement')
+       data=Stock.objects.filter(refMateriel=request.GET.get('valSearch'))
+       for d in data:
+            
+            print(lieu , typeMove)
+            if d.situation=='DISPONIBLE' and typeMove=='SORTIE':
+                data.update(situation='LOUER' )
+                data.update(lieu=lieu)
+            elif d.situation=='LOUER' and typeMove=='ENTREE':
+                data.update(situation='DISPONIBLE',lieu=" ")
+            elif d.situation=='LOUER' and typeMove=='SORTIE':
+                print("kighen ghida 1")
+                dispo='louer'
+            elif d.situation=='DISPONIBLE' and typeMove=='ENTREE':
+                dispo='dispo'
+
+        
+
+            
+            da= {"designation":d.designation,
+                 'dispo':dispo}
+
+       return JsonResponse({'data':da})
+    
+def deleteMovement(request, id):
+    move=Movement.objects.get(id=id)
+    move.delete()
+
+    messages.info(request, f"Vous avez supprimer {move} avec success")   
+    return redirect("movement") 
+    
+
+    

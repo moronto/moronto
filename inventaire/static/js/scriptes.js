@@ -227,4 +227,80 @@ $('#searchMovement').on('input',function(){
 
 });
 
+//cherche designation 
+const myAlert=document.querySelector("#myAlert")
+const alertTitle=document.querySelector(".alertTitle")
+const alerBody=document.querySelector(".alertBody")
+function showAlert(title,msgBody){
+    
+    myAlert.style.display="block";
+    alertTitle.innerHTML=title;
+    alerBody.innerHTML=msgBody;
+    setTimeout(()=>{
+        myAlert.style.display="none";
+
+    },2000)
+
+}
+    $(function(){
+
+        const inputs=$(" #refMateriel , #typeMovement , #lieu  ")
+       
+        
+        inputs.on('input',function(){
+            let params = {
+                valSearch: $("#refMateriel").val(),
+                typeMovement: $("#typeMovement").val(),
+                lieu: $("#lieu").val()
+            };
+
+            $.ajax({
+                url:'/searchDesignation/',
+                method: 'GET',
+                cache:false,
+                data: params,
+                dataType:'json',
+                success: function(response) {
+                    const designation=document.querySelector("#designation")
+                    console.log(response.data.dispo)
+                    
+                    if (response.data.dispo=='dispo'){
+                        showAlert("Attention ?","Ce reference est deja disponible")
+                    }else if(response.data.dispo=='louer'){
+                        showAlert("Attention ?","Ce reference est deja louer")
+
+                    }
+    
+        
+                    designation.value = response.data.designation ? response.data.designation : ""
+        
+        
+                    
+        
+                   
+                     
+                }, 
+            
+        
+            });
+        })
+
+
+    
+       
+        
+       
+    
+    
+    });
+
+
+
+
+
+
+
+
+
+
 //end movement

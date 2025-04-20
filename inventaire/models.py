@@ -38,21 +38,12 @@ class DetilsReservation(models.Model):
 
     
 class Stock(models.Model):
-    # etat=[("louer","LOUER"),
-    #       ("disponible","DISPONIBLE"),
-    #       ("vente","VENTE"),
-    #       ("don","DON"),
-    #       ("verifie","A VERIFIER"),
-    #       ("utiliser","UTILISER"),
-    #       ]
-    # cat=[("GROUPE ELECTROGENE","GROUPE ELECTROGENE"),
-    #       ("MOUDULAIRE","MOUDULAIRE"),
-    #       ("CABINE AUTONOME","CABINE AUTONOME"),
-    #       ]
+   
     refMateriel=models.CharField(max_length=50,primary_key=True) 
     designation=models.CharField(max_length=100) 
     situation=models.CharField(max_length=50)
-    lieu=models.CharField(max_length=100)
+    lieu=models.CharField(max_length=100,null=True)
+    client=models.CharField(max_length=100,null=True)
     categorie=models.CharField(max_length=50)
 
     def __str__(self):
