@@ -9,5 +9,7 @@ route.register('stock',StockData,basename="stock"),
 urlpatterns = [
     path("",include(route.urls)),
         path('stocks/<str:ref>/', detailStock, name='stock-detail'),
+        path('stock/<str:ref>/', deleteStock, name='stock-delete'),
+        path('stocks/', addStock, name='addStock'),
 
 ]
